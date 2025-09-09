@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class UserResponseDto {
-    private Long id;
+    private Integer id;
     private String nomeCompleto;
     private String email;
     private String fotoPerfil;

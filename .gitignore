@@ -1,0 +1,44 @@
+# ===============================================================
+# ARQUIVO DE SEGREDOS LOCAL (O MAIS IMPORTANTE!)
+# =-=============================================================
+secrets.properties
+
+
+# ===============================================================
+# ARQUIVOS GERADOS PELA IDE
+# ===============================================================
+# IntelliJ
+.idea/
+*.iml
+*.iws
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# VS Code
+.vscode/
+
+
+# ===============================================================
+# ARQUIVOS GERADOS PELO MAVEN E JAVA
+# ===============================================================
+# Pasta de build do Maven
+target/
+
+# Arquivos de log
+*.log
+
+# Arquivos de compilação do Java
+*.class
+
+
+# ===============================================================
+# ARQUIVOS DE SISTEMA OPERACIONAL
+# ===============================================================
+# Mac
+.DS_Store
+
+# Windows
+Thumbs.db
