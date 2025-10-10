@@ -55,6 +55,13 @@
         </dependency>
         -->
 
+<!--Eu Yasmin ADICIONEI:-->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.7.4</version>
+		</dependency>
+
 		<dependency>
 			<groupId>com.vladmihalcea</groupId>
 			<artifactId>hibernate-types-60</artifactId>
