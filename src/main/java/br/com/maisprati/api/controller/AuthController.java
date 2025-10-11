@@ -2,14 +2,12 @@ package br.com.maisprati.api.controller;
 
 import br.com.maisprati.api.dto.RegisterDto;
 import br.com.maisprati.api.dto.UserResponseDto;
-import br.com.maisprati.api.model.User;
 import br.com.maisprati.api.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -23,6 +21,20 @@ public class AuthController {
         UserResponseDto usuarioCadastrado = authService.register(dados);
         return ResponseEntity.status(201).body(usuarioCadastrado);
     }
+
+    @GetMapping("/users")
+    public ResponseEntity<List<UserResponseDto>> buscarUsuarios(){
+        List<UserResponseDto> userResponseDto = authService.buscarUsuarios();
+        return ResponseEntity.status(201).body(userResponseDto);
+    }
+
+    @GetMapping("users/{id}")
+    public ResponseEntity<UserResponseDto> getUserById(@PathVariable Integer id){
+        UserResponseDto userResponseDto = authService.getUserById(id);
+        return ResponseEntity.status(201).body(userResponseDto);
+    }
+
+
 }
 
 

@@ -8,6 +8,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor // Cria um construtor com todos os campos `final`
 public class AuthService {
@@ -42,5 +46,48 @@ public class AuthService {
         User usuarioSalvo = userRepository.save(novoUsuario);
 
         return new UserResponseDto(usuarioSalvo);
+    }
+
+    public UserResponseDto getUserById(Integer id){
+        Optional<User> userById = userRepository.findById(id);
+
+        if(userById.isEmpty()){
+            System.out.println("Usuário não existe");
+        }
+
+        User userResponse = userRepository.getReferenceById(id);
+
+        UserResponseDto userResponseDto = new UserResponseDto();
+
+        userResponseDto.setId(userResponse.getId());
+        userResponseDto.setNomeCompleto(userResponse.getNomeCompleto());
+        userResponseDto.setEmail(userResponse.getEmail());
+        userResponseDto.setFotoPerfil(userResponse.getFotoPerfil());
+        userResponseDto.setStreakAtual(userResponse.getStreakAtual());
+
+        return userResponseDto;
+    }
+
+    public List<UserResponseDto> buscarUsuarios() {
+        List<User> usuarios = userRepository.findAll();
+        List<UserResponseDto> listUsers = new ArrayList<>();
+        for(int i = 0; i < usuarios.size(); i++){
+            UserResponseDto userResponseDto = new UserResponseDto();
+            userResponseDto.setId(usuarios.get(i).getId());
+            userResponseDto.setNomeCompleto(usuarios.get(i).getNomeCompleto());
+            userResponseDto.setEmail(usuarios.get(i).getEmail());
+            listUsers.add(userResponseDto);
+
+        }
+        //Outra forma de fazer:
+//        return userRepository.findAll().stream()
+//                .map(usuario -> new UserResponseDto(
+//                        usuario.getId(),
+//                        usuario.getNomeCompleto(),
+//                        usuario.getEmail()
+//                ))
+//                .toList();
+
+        return listUsers;
     }
 }

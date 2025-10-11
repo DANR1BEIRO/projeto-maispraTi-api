@@ -113,7 +113,7 @@ public class ExerciseService {
             System.out.println("Exercício não existe.");
         }
 
-        Exercise exercise = exerciseParaBuscar.get();
+        //Exercise exercise = exerciseParaBuscar.get();
         Exercise exerciseResponse = exerciseRepository.getReferenceById(id);
 
         ExerciseResponseDto exerciseResponseDto = new ExerciseResponseDto();

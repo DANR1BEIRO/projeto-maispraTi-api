@@ -1,5 +1,4 @@
 # Projeto +praTi
-# Projeto API - MaisPraTi
 
 API desenvolvida em **Java + Spring Boot**, com integração a banco de dados **PostgreSQL (Neon)**.  
 Este guia explica como configurar o ambiente e executar o projeto localmente.
