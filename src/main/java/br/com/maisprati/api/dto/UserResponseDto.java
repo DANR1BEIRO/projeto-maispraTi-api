@@ -8,14 +8,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserResponseDto {
     private Integer id;
-    private String nomeCompleto;
+    private String nome;
     private String email;
     private String fotoPerfil;
     private Integer streakAtual;
 
     public UserResponseDto(User user) {
         this.id = user.getId();
-        this.nomeCompleto = user.getNomeCompleto();
+        this.nome = user.getNome();
         this.email = user.getEmail();
         this.fotoPerfil = user.getFotoPerfil();
         this.streakAtual = user.getStreakAtual();
