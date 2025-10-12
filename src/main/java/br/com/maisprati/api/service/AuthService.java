@@ -77,7 +77,7 @@ public class AuthService implements UserDetailsService {
         UserResponseDto userResponseDto = new UserResponseDto();
 
         userResponseDto.setId(userResponse.getId());
-        userResponseDto.setNomeCompleto(userResponse.getNomeCompleto());
+        userResponseDto.setNome(userResponse.getNome());
         userResponseDto.setEmail(userResponse.getEmail());
         userResponseDto.setFotoPerfil(userResponse.getFotoPerfil());
         userResponseDto.setStreakAtual(userResponse.getStreakAtual());
@@ -91,7 +91,7 @@ public class AuthService implements UserDetailsService {
         for(int i = 0; i < usuarios.size(); i++){
             UserResponseDto userResponseDto = new UserResponseDto();
             userResponseDto.setId(usuarios.get(i).getId());
-            userResponseDto.setNomeCompleto(usuarios.get(i).getNomeCompleto());
+            userResponseDto.setNome(usuarios.get(i).getNome());
             userResponseDto.setEmail(usuarios.get(i).getEmail());
             listUsers.add(userResponseDto);
 

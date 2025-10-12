@@ -1,10 +1,11 @@
 package br.com.maisprati.api.controller;
 
-import br.com.maisprati.api.dto.ExerciseDto;
+import br.com.maisprati.api.dto.ExerciseRequestDto;
 import br.com.maisprati.api.dto.ExerciseResponseDto;
 import br.com.maisprati.api.service.ExerciseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,24 +15,28 @@ public class ExerciseController {
 
     private final ExerciseService exerciseService;
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/exercise")
-    public ResponseEntity<ExerciseResponseDto> criarExercicio(@RequestBody ExerciseDto exerciseDto) {
-        ExerciseResponseDto exerciseResponseDto = exerciseService.criarExercicio(exerciseDto);
+    public ResponseEntity<ExerciseResponseDto> criarExercicio(@RequestBody ExerciseRequestDto exerciseRequestDto) {
+        ExerciseResponseDto exerciseResponseDto = exerciseService.criarExercicio(exerciseRequestDto);
         return ResponseEntity.status(201).body(exerciseResponseDto);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping("/exercise/{id}")
-    public ResponseEntity<ExerciseResponseDto> atualizarExercicio(@PathVariable Integer id, @RequestBody ExerciseDto exerciseDto) {
-        ExerciseResponseDto exerciseResponseDto = exerciseService.editarExercicio(id, exerciseDto);
+    public ResponseEntity<ExerciseResponseDto> atualizarExercicio(@PathVariable Integer id, @RequestBody ExerciseRequestDto exerciseRequestDto) {
+        ExerciseResponseDto exerciseResponseDto = exerciseService.editarExercicio(id, exerciseRequestDto);
         return ResponseEntity.status(201).body(exerciseResponseDto);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping("/exercise/{id}")
     public ResponseEntity<ExerciseResponseDto> deletarExercicio(@PathVariable Integer id){
         ExerciseResponseDto exerciseResponseDto = exerciseService.excluirExercicio(id);
         return ResponseEntity.status(201).body(exerciseResponseDto);
     }
 
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping("/exercise/{id}")
     public ResponseEntity<ExerciseResponseDto> buscarExercicio(@PathVariable Integer id){
         ExerciseResponseDto exerciseResponseDto = exerciseService.buscarExercicio(id);

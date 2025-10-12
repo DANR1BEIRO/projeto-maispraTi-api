@@ -1,7 +1,8 @@
 package br.com.maisprati.api.service;
 
-import br.com.maisprati.api.dto.ExerciseDto;
+import br.com.maisprati.api.dto.ExerciseRequestDto;
 import br.com.maisprati.api.dto.ExerciseResponseDto;
+import br.com.maisprati.api.mapper.ExerciseMapper;
 import br.com.maisprati.api.model.Exercise;
 import br.com.maisprati.api.repository.ExerciseRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,37 +15,29 @@ import java.util.Optional;
 public class ExerciseService {
 
     private final ExerciseRepository exerciseRepository;
+    private final ExerciseMapper mapper;
 
-    public ExerciseResponseDto criarExercicio(ExerciseDto exerciseDto){
+    public ExerciseResponseDto criarExercicio(ExerciseRequestDto exerciseRequestDto){
 
         //Ver se já existe na base o exercício, se existe, mata o processo, se não segue para salvar
-        if (exerciseRepository.findByPergunta(exerciseDto.getPergunta()) != null) {
+        if (exerciseRepository.findByPergunta(exerciseRequestDto.getPergunta()) != null) {
             throw new RuntimeException("Exercício já cadastrado!");
         }
 
         //Monta o objeto de entidade para salvar na base pela repository
-        Exercise exercise = new Exercise();
-        exercise.setGrupo(exerciseDto.getGrupo());
-        exercise.setPergunta(exerciseDto.getPergunta());
-        exercise.setAlternativas(exerciseDto.getAlternativas());
-        exercise.setRespostaCorreta(exerciseDto.getRespostaCorreta());
+        Exercise exercise = mapper.toEntity(exerciseRequestDto);
 
         //Executa save da repository para salvar exercício na base
         Exercise exerciseResponse = exerciseRepository.save(exercise);
 
         //Repassa os dados do execício salvo na base para um objeto de retorno para o usuário enxergar
-        ExerciseResponseDto exerciseResponseDto = new ExerciseResponseDto();
-        exerciseResponseDto.setId(exerciseResponse.getId());
-        exerciseResponseDto.setGrupo(exerciseResponse.getGrupo());
-        exerciseResponseDto.setPergunta(exerciseResponse.getPergunta());
-        exerciseResponseDto.setAlternativas(exerciseResponse.getAlternativas());
-        exerciseResponseDto.setRespostaCorreta(exerciseResponse.getRespostaCorreta());
+        ExerciseResponseDto exerciseResponseDto = mapper.toResponse(exercise);
 
         //Retorna objeto de retorno
         return exerciseResponseDto;
     }
 
-    public ExerciseResponseDto editarExercicio(Integer id, ExerciseDto exerciseDto){
+    public ExerciseResponseDto editarExercicio(Integer id, ExerciseRequestDto exerciseRequestDto){
         Optional<Exercise> exerciseParaAtualizar = exerciseRepository.findById(id);
 
         //Ver se já existe na base o exercício, se existe, mata o processo, se não segue para salvar
@@ -54,20 +47,20 @@ public class ExerciseService {
 
         Exercise exercise = exerciseParaAtualizar.get();
 
-        if (exerciseDto.getGrupo() != null){
-            exercise.setGrupo(exerciseDto.getGrupo());
+        if (exerciseRequestDto.getGrupo() != null){
+            exercise.setGrupo(exerciseRequestDto.getGrupo());
         }
 
-        if(exerciseDto.getPergunta() != null){
-            exercise.setPergunta(exerciseDto.getPergunta());
+        if(exerciseRequestDto.getPergunta() != null){
+            exercise.setPergunta(exerciseRequestDto.getPergunta());
         }
 
-        if (exerciseDto.getAlternativas() != null){
-            exercise.setAlternativas(exerciseDto.getAlternativas());
+        if (exerciseRequestDto.getAlternativas() != null){
+            exercise.setAlternativas(exerciseRequestDto.getAlternativas());
         }
 
-        if (exerciseDto.getRespostaCorreta() != null) {
-            exercise.setRespostaCorreta(exerciseDto.getRespostaCorreta());
+        if (exerciseRequestDto.getRespostaCorreta() != null) {
+            exercise.setRespostaCorreta(exerciseRequestDto.getRespostaCorreta());
         }
 
         //Executa save da repository para salvar exercício na base

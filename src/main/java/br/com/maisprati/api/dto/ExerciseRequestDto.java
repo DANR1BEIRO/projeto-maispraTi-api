@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class ExerciseDto {
+public class ExerciseRequestDto {
     private String grupo;
     private String pergunta;
     private List<String> alternativas;
