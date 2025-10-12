@@ -67,13 +67,13 @@ public class ExerciseService {
         Exercise exerciseResponse = exerciseRepository.save(exercise);
 
         //Repassa os dados do execício salvo na base para um objeto de retorno para o usuário enxergar
-        ExerciseResponseDto exerciseResponseDto = new ExerciseResponseDto();
-        exerciseResponseDto.setId(exerciseResponse.getId());
-        exerciseResponseDto.setGrupo(exerciseResponse.getGrupo());
-        exerciseResponseDto.setPergunta(exerciseResponse.getPergunta());
-        exerciseResponseDto.setAlternativas(exerciseResponse.getAlternativas());
-        exerciseResponseDto.setRespostaCorreta(exerciseResponse.getRespostaCorreta());
-
+//        ExerciseResponseDto exerciseResponseDto = new ExerciseResponseDto();
+//        exerciseResponseDto.setId(exerciseResponse.getId());
+//        exerciseResponseDto.setGrupo(exerciseResponse.getGrupo());
+//        exerciseResponseDto.setPergunta(exerciseResponse.getPergunta());
+//        exerciseResponseDto.setAlternativas(exerciseResponse.getAlternativas());
+//        exerciseResponseDto.setRespostaCorreta(exerciseResponse.getRespostaCorreta());
+        ExerciseResponseDto exerciseResponseDto = mapper.toResponse(exercise);
         //Retorna objeto de retorno
         return exerciseResponseDto;
     }
@@ -89,12 +89,14 @@ public class ExerciseService {
 
         exerciseRepository.deleteById(id);
 
-        ExerciseResponseDto exerciseResponseDto = new ExerciseResponseDto();
-        exerciseResponseDto.setId(exercise.getId());
-        exerciseResponseDto.setGrupo(exercise.getGrupo());
-        exerciseResponseDto.setPergunta(exercise.getPergunta());
-        exerciseResponseDto.setAlternativas(exercise.getAlternativas());
-        exerciseResponseDto.setRespostaCorreta(exercise.getRespostaCorreta());
+//        ExerciseResponseDto exerciseResponseDto = new ExerciseResponseDto();
+//        exerciseResponseDto.setId(exercise.getId());
+//        exerciseResponseDto.setGrupo(exercise.getGrupo());
+//        exerciseResponseDto.setPergunta(exercise.getPergunta());
+//        exerciseResponseDto.setAlternativas(exercise.getAlternativas());
+//        exerciseResponseDto.setRespostaCorreta(exercise.getRespostaCorreta());
+
+        ExerciseResponseDto exerciseResponseDto = mapper.toResponse(exercise);
 
         return exerciseResponseDto;
     }
@@ -109,13 +111,13 @@ public class ExerciseService {
         //Exercise exercise = exerciseParaBuscar.get();
         Exercise exerciseResponse = exerciseRepository.getReferenceById(id);
 
-        ExerciseResponseDto exerciseResponseDto = new ExerciseResponseDto();
-        exerciseResponseDto.setId(exerciseResponse.getId());
-        exerciseResponseDto.setGrupo(exerciseResponse.getGrupo());
-        exerciseResponseDto.setPergunta(exerciseResponse.getPergunta());
-        exerciseResponseDto.setAlternativas(exerciseResponse.getAlternativas());
-        exerciseResponseDto.setRespostaCorreta(exerciseResponse.getRespostaCorreta());
-
+//        ExerciseResponseDto exerciseResponseDto = new ExerciseResponseDto();
+//        exerciseResponseDto.setId(exerciseResponse.getId());
+//        exerciseResponseDto.setGrupo(exerciseResponse.getGrupo());
+//        exerciseResponseDto.setPergunta(exerciseResponse.getPergunta());
+//        exerciseResponseDto.setAlternativas(exerciseResponse.getAlternativas());
+//        exerciseResponseDto.setRespostaCorreta(exerciseResponse.getRespostaCorreta());
+        ExerciseResponseDto exerciseResponseDto = mapper.toResponse(exerciseResponse);
         return exerciseResponseDto;
     }
 }

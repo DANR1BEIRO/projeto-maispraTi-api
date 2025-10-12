@@ -2,6 +2,7 @@ package br.com.maisprati.api.service;
 
 import br.com.maisprati.api.dto.LoginResponseDto;
 import br.com.maisprati.api.dto.RegisterDto;
+import br.com.maisprati.api.mapper.UserMapper;
 import br.com.maisprati.api.model.Role;
 import br.com.maisprati.api.dto.UserResponseDto;
 import br.com.maisprati.api.model.User;
@@ -19,8 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class AuthService implements UserDetailsService {
@@ -29,6 +28,8 @@ public class AuthService implements UserDetailsService {
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
+    private final UserMapper mapper;
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -74,14 +75,14 @@ public class AuthService implements UserDetailsService {
 
         User userResponse = userRepository.getReferenceById(id);
 
-        UserResponseDto userResponseDto = new UserResponseDto();
-
-        userResponseDto.setId(userResponse.getId());
-        userResponseDto.setNome(userResponse.getNome());
-        userResponseDto.setEmail(userResponse.getEmail());
-        userResponseDto.setFotoPerfil(userResponse.getFotoPerfil());
-        userResponseDto.setStreakAtual(userResponse.getStreakAtual());
-
+//        UserResponseDto userResponseDto = new UserResponseDto();
+//
+//        userResponseDto.setId(userResponse.getId());
+//        userResponseDto.setNome(userResponse.getNome());
+//        userResponseDto.setEmail(userResponse.getEmail());
+//        userResponseDto.setFotoPerfil(userResponse.getFotoPerfil());
+//        userResponseDto.setStreakAtual(userResponse.getStreakAtual());
+        UserResponseDto userResponseDto = mapper.toResponse(userResponse);
         return userResponseDto;
     }
 
@@ -89,10 +90,11 @@ public class AuthService implements UserDetailsService {
         List<User> usuarios = userRepository.findAll();
         List<UserResponseDto> listUsers = new ArrayList<>();
         for(int i = 0; i < usuarios.size(); i++){
-            UserResponseDto userResponseDto = new UserResponseDto();
-            userResponseDto.setId(usuarios.get(i).getId());
-            userResponseDto.setNome(usuarios.get(i).getNome());
-            userResponseDto.setEmail(usuarios.get(i).getEmail());
+//            UserResponseDto userResponseDto = new UserResponseDto();
+//            userResponseDto.setId(usuarios.get(i).getId());
+//            userResponseDto.setNome(usuarios.get(i).getNome());
+//            userResponseDto.setEmail(usuarios.get(i).getEmail());
+            UserResponseDto userResponseDto = mapper.toResponse(usuarios.get(i));
             listUsers.add(userResponseDto);
 
         }
