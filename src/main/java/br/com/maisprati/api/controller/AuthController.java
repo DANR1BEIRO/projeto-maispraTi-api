@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final AuthService authService;
-    private final AuthenticationManager authenticationManager; // Injetamos o manager aqui
+    private final AuthenticationManager authenticationManager;
 
     @PostMapping("/register")
     public ResponseEntity<UserResponseDto> register(@RequestBody @Valid RegisterDto dados) {
