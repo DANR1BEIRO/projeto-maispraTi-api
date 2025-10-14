@@ -51,13 +51,13 @@ public class AuthController {
     @GetMapping("/users")
     public ResponseEntity<List<UserResponseDto>> buscarUsuarios(){
         List<UserResponseDto> userResponseDto = authService.buscarUsuarios();
-        return ResponseEntity.status(201).body(userResponseDto);
+        return ResponseEntity.status(200).body(userResponseDto);
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("users/{id}")
     public ResponseEntity<UserResponseDto> getUserById(@PathVariable Integer id){
         UserResponseDto userResponseDto = authService.getUserById(id);
-        return ResponseEntity.status(201).body(userResponseDto);
+        return ResponseEntity.status(200).body(userResponseDto);
     }
 }
