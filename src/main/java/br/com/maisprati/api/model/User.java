@@ -1,17 +1,20 @@
 package br.com.maisprati.api.model;
 
+import br.com.maisprati.api.enuns.PostgreSQLEnumType;
+import br.com.maisprati.api.enuns.RoleEnum;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Type;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(name = "users")
+@Table(name = "\"UserSystem\"")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -22,32 +25,37 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "nome_completo", nullable = false)
-    private String nome;
+    @Column(name = "\"nomeCompleto\"", nullable = false)
+    private String nomeCompleto;
 
-    @Column(unique = true, nullable = false)
+    @Column(name = "\"email\"", unique = true, nullable = false)
     private String email;
 
-    @Column(name = "senha_hash", nullable = false)
+    @Column(name = "\"senhaHash\"", nullable = false)
     private String senhaHash;
 
-    @Column(name = "foto_perfil")
+    @Column(name = "\"fotoPerfil\"")
     private String fotoPerfil;
 
-    @Column(name = "streak_atual")
+    @Type(PostgreSQLEnumType.class)
+    @Column(name = "\"role\"", columnDefinition = "role")
+    private RoleEnum role;
+
+    @Column(name = "\"streakAtual\"")
     private Integer streakAtual;
 
-    @Column(name = "grupo_atual")
-    private String grupoAtual;
+    @Column(name = "\"grupoAtualId\"")
+    private Integer grupoAtualId;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user")
-    private List<Role> roles = new ArrayList<>();
+    @Column(name = "\"createdAt\"", nullable = false)
+    private LocalDateTime createdAt;
+
+    @Column(name = "\"updatedAt\"")
+    private LocalDateTime updatedAt;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles.stream()
-                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRole()))
-                .toList();
+        return List.of(new SimpleGrantedAuthority("ROLE_" + role));
     }
 
     @Override
