@@ -15,7 +15,7 @@ public class UserResponseDto {
 
     public UserResponseDto(User user) {
         this.id = user.getId();
-        this.nome = user.getNome();
+        this.nome = user.getNomeCompleto();
         this.email = user.getEmail();
         this.fotoPerfil = user.getFotoPerfil();
         this.streakAtual = user.getStreakAtual();

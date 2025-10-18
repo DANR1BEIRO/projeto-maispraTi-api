@@ -1,11 +1,10 @@
 package br.com.maisprati.api.security;
 
-import br.com.maisprati.api.model.Role;
 import br.com.maisprati.api.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys; // Import novo e importante
-import jakarta.annotation.PostConstruct; // Import necessário
+import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -39,9 +38,7 @@ public class JwtProvider {
      * @return token JWT válido
      */
     public String generateToken(User user) {
-        List<String> roles = user.getRoles().stream()
-                .map(Role::getRole)
-                .toList();
+        List<String> roles = List.of(user.getRole().name());
 
         return Jwts.builder()
                 .setSubject(user.getUsername())
