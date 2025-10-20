@@ -1,8 +1,10 @@
 package br.com.maisprati.api.controller;
 
+import br.com.maisprati.api.dto.ExercisePutRequestDto;
 import br.com.maisprati.api.dto.ExerciseRequestDto;
 import br.com.maisprati.api.dto.ExerciseResponseDto;
 import br.com.maisprati.api.service.ExerciseService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,15 +19,15 @@ public class ExerciseController {
 
     @PreAuthorize("hasAnyRole('PROFESSOR')")
     @PostMapping("/exercise")
-    public ResponseEntity<ExerciseResponseDto> criarExercicio(@RequestBody ExerciseRequestDto exerciseRequestDto) {
+    public ResponseEntity<ExerciseResponseDto> criarExercicio(@Valid @RequestBody ExerciseRequestDto exerciseRequestDto) {
         ExerciseResponseDto exerciseResponseDto = exerciseService.criarExercicio(exerciseRequestDto);
         return ResponseEntity.status(201).body(exerciseResponseDto);
     }
 
     @PreAuthorize("hasAnyRole('PROFESSOR')")
     @PutMapping("/exercise/{id}")
-    public ResponseEntity<ExerciseResponseDto> atualizarExercicio(@PathVariable Integer id, @RequestBody ExerciseRequestDto exerciseRequestDto) {
-        ExerciseResponseDto exerciseResponseDto = exerciseService.editarExercicio(id, exerciseRequestDto);
+    public ResponseEntity<ExerciseResponseDto> atualizarExercicio(@PathVariable Integer id, @RequestBody ExercisePutRequestDto exercisePutRequestDto) {
+        ExerciseResponseDto exerciseResponseDto = exerciseService.editarExercicio(id, exercisePutRequestDto);
         return ResponseEntity.status(201).body(exerciseResponseDto);
     }
 

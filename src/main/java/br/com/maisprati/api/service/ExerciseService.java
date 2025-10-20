@@ -1,5 +1,6 @@
 package br.com.maisprati.api.service;
 
+import br.com.maisprati.api.dto.ExercisePutRequestDto;
 import br.com.maisprati.api.dto.ExerciseRequestDto;
 import br.com.maisprati.api.dto.ExerciseResponseDto;
 import br.com.maisprati.api.mapper.ExerciseMapper;
@@ -37,7 +38,7 @@ public class ExerciseService {
         return exerciseResponseDto;
     }
 
-    public ExerciseResponseDto editarExercicio(Integer id, ExerciseRequestDto exerciseRequestDto){
+    public ExerciseResponseDto editarExercicio(Integer id, ExercisePutRequestDto exerciseRequestDto){
         Optional<Exercise> exerciseParaAtualizar = exerciseRepository.findById(id);
 
         //Ver se já existe na base o exercício, se existe, mata o processo, se não segue para salvar
@@ -47,8 +48,8 @@ public class ExerciseService {
 
         Exercise exercise = exerciseParaAtualizar.get();
 
-        if (exerciseRequestDto.getGrupo() != null){
-            exercise.setGrupo(exerciseRequestDto.getGrupo());
+        if (exerciseRequestDto.getTipo() != null){
+            exercise.setTipo(exerciseRequestDto.getTipo());
         }
 
         if(exerciseRequestDto.getPergunta() != null){
@@ -61,6 +62,10 @@ public class ExerciseService {
 
         if (exerciseRequestDto.getRespostaCorreta() != null) {
             exercise.setRespostaCorreta(exerciseRequestDto.getRespostaCorreta());
+        }
+
+        if (exerciseRequestDto.getGrupoId() != null){
+            exercise.setGrupoId(exerciseRequestDto.getGrupoId());
         }
 
         //Executa save da repository para salvar exercício na base
