@@ -9,14 +9,14 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface ExerciseMapper {
 
-    @Mapping(source = "grupo", target = "grupo")
+    @Mapping(source = "grupoId", target = "grupoId")
     @Mapping(source = "pergunta", target = "pergunta")
     @Mapping(source = "alternativas", target = "alternativas")
     @Mapping(source = "respostaCorreta", target = "respostaCorreta")
     Exercise toEntity(ExerciseRequestDto exerciseRequestDto);
 
     @Mapping(source = "id", target = "id")
-    @Mapping(source = "grupo", target = "grupo")
+    @Mapping(source = "grupoId", target = "grupoId")
     @Mapping(source = "pergunta", target = "pergunta")
     @Mapping(source = "alternativas", target = "alternativas")
     @Mapping(source = "respostaCorreta", target = "respostaCorreta")
