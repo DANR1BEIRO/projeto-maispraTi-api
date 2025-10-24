@@ -1,7 +1,6 @@
 package br.com.maisprati.api.model;
 
 import br.com.maisprati.api.enuns.ExerciseTypeEnum;
-import br.com.maisprati.api.enuns.PostgreSQLEnumType;
 import br.com.maisprati.api.enuns.PostgreSQLExerciseTypeEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -26,16 +25,15 @@ public class Exercise {
     @Column(name = "\"tipo\"", columnDefinition = "tipo")
     private ExerciseTypeEnum tipo;
 
-    @Column(name = "pergunta", unique = true)
+    @Column(name = "\"pergunta\"", unique = true)
     private String pergunta;
 
-    @Column(name = "opcoes")
+    @Column(name = "\"opcoes\"")
     private List<String> alternativas;
 
-    @Column(name = "resposta_correta")
+    @Column(name = "\"resposta_correta\"")
     private String respostaCorreta;
 
-    //Deu ruim, transformar na tabela o grupoId para snakcase grupo_id
-    @Column(name = "grupo_id")
+    @Column(name = "\"grupo_id\"")
     private Integer grupoId;
 }
