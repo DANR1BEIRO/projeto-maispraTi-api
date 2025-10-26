@@ -9,6 +9,8 @@ import br.com.maisprati.api.repository.ExerciseGroupRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ExerciseGroupService {
@@ -22,4 +24,9 @@ public class ExerciseGroupService {
         return exerciseGroupResponseDto;
     }
 
+    public List<ExerciseGroupResponseDto> buscarTodosGruposExercicios(){
+        List<ExerciseGroup> exerciseGroupList = exerciseGroupRepository.findAll();
+        List<ExerciseGroupResponseDto> exerciseGroupResponseDtoList = mapper.toResponseList(exerciseGroupList);
+        return exerciseGroupResponseDtoList;
+    }
 }

@@ -6,10 +6,12 @@ import br.com.maisprati.api.service.ExerciseGroupService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin/")
@@ -22,5 +24,12 @@ public class ExerciseGroupController {
     public ResponseEntity<ExerciseGroupResponseDto> criarGrupoExercicios(@Valid @RequestBody ExerciseGroupRequestDto exerciseGroupRequestDto) {
         ExerciseGroupResponseDto exerciseGroupResponseDto = exerciseGroupService.criarGrupoExercicios(exerciseGroupRequestDto);
         return ResponseEntity.status(201).body(exerciseGroupResponseDto);
+    }
+
+    @GetMapping("/exercise/group")
+    public ResponseEntity<List<ExerciseGroupResponseDto>> buscarTodosGruposExercicios(){
+        List<ExerciseGroupResponseDto> exerciseGroupResponseDto = exerciseGroupService.buscarTodosGruposExercicios();
+        return ResponseEntity.status(200).body(exerciseGroupResponseDto);
+
     }
 }

@@ -34,6 +34,7 @@ public class Exercise {
     @Column(name = "\"resposta_correta\"")
     private String respostaCorreta;
 
-    @Column(name = "\"grupo_id\"")
-    private Integer grupoId;
+    @ManyToOne
+    @JoinColumn(name = "\"grupo_id\"")
+    private ExerciseGroup grupoId;
 }

@@ -10,10 +10,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -28,11 +27,11 @@ public class ExerciseListController {
         ExerciseListResponseDto exerciseListResponseDto = exerciseListService.criarListaExercicios(exerciseListRequestDto);
         return ResponseEntity.status(201).body(exerciseListResponseDto);
     }
-//    @PreAuthorize("hasAnyRole('PROFESSOR')")
-//    @PostMapping("/exercise")
-//    public ResponseEntity<ExerciseListResponseDto> criarListaExercicio(@Valid @RequestBody ExerciseListRequestDto exerciseListRequestDto) {
-//        ExerciseResponseDto exerciseListResponseDto = exerciseListService.criarListaExercicios(exerciseListRequestDto);
-//        return ResponseEntity.status(201).body(exerciseListResponseDto);
-//    }
+
+    @GetMapping("/exercise/list")
+    public ResponseEntity<List<ExerciseListResponseDto>> buscarTodasListasExercicios(){
+        List<ExerciseListResponseDto> exerciseListResponseDto = exerciseListService.buscarTodasListasExercicios();
+        return ResponseEntity.status(200).body(exerciseListResponseDto);
+    }
 
 }
