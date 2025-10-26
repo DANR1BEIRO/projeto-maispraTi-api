@@ -36,5 +36,5 @@ public class Exercise {
 
     @ManyToOne
     @JoinColumn(name = "\"grupo_id\"")
-    private ExerciseGroup grupoId;
+    private ExerciseGroup grupo;
 }

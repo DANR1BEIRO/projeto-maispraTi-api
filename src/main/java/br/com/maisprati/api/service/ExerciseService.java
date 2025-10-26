@@ -5,6 +5,7 @@ import br.com.maisprati.api.dto.ExerciseRequestDto;
 import br.com.maisprati.api.dto.ExerciseResponseDto;
 import br.com.maisprati.api.mapper.ExerciseMapper;
 import br.com.maisprati.api.model.Exercise;
+import br.com.maisprati.api.model.ExerciseGroup;
 import br.com.maisprati.api.repository.ExerciseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -65,7 +66,9 @@ public class ExerciseService {
         }
 
         if (exerciseRequestDto.getGrupoId() != null){
-            exercise.setGrupoId(exerciseRequestDto.getGrupoId());
+            ExerciseGroup group = new ExerciseGroup();
+            group.setId(exerciseRequestDto.getGrupoId());
+            exercise.setGrupo(group);
         }
 
         //Executa save da repository para salvar exercício na base

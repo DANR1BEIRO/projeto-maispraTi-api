@@ -34,7 +34,7 @@ public class ExerciseGroup {
     private ExerciseList exerciseList;
 
 //    @Column(name = "exercicios")
-    @OneToMany(mappedBy = "grupoId",  cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "grupo",  cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Exercise> exercises;
 
 }
