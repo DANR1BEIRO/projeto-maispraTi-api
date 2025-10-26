@@ -9,11 +9,14 @@ import br.com.maisprati.api.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -42,5 +45,19 @@ public class AuthController {
     @GetMapping("/me")
     public ResponseEntity<UserResponseDto> me(@AuthenticationPrincipal User user) {
         return ResponseEntity.ok(new UserResponseDto(user));
+    }
+
+    @PreAuthorize("hasAnyRole('PROFESSOR')")
+    @GetMapping("/users")
+    public ResponseEntity<List<UserResponseDto>> buscarUsuarios(){
+        List<UserResponseDto> userResponseDto = authService.buscarUsuarios();
+        return ResponseEntity.status(200).body(userResponseDto);
+    }
+
+    @PreAuthorize("hasAnyRole('PROFESSOR')")
+    @GetMapping("users/{id}")
+    public ResponseEntity<UserResponseDto> getUserById(@PathVariable Integer id){
+        UserResponseDto userResponseDto = authService.getUserById(id);
+        return ResponseEntity.status(200).body(userResponseDto);
     }
 }
