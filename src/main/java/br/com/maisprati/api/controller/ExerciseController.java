@@ -17,28 +17,28 @@ public class ExerciseController {
 
     private final ExerciseService exerciseService;
 
-    @PreAuthorize("hasAnyRole('PROFESSOR')")
+//    @PreAuthorize("hasAnyRole('PROFESSOR')")
     @PostMapping("/exercise")
     public ResponseEntity<ExerciseResponseDto> criarExercicio(@Valid @RequestBody ExerciseRequestDto exerciseRequestDto) {
         ExerciseResponseDto exerciseResponseDto = exerciseService.criarExercicio(exerciseRequestDto);
         return ResponseEntity.status(201).body(exerciseResponseDto);
     }
 
-    @PreAuthorize("hasAnyRole('PROFESSOR')")
+//    @PreAuthorize("hasAnyRole('PROFESSOR')")
     @PutMapping("/exercise/{id}")
     public ResponseEntity<ExerciseResponseDto> atualizarExercicio(@PathVariable Integer id, @RequestBody ExercisePutRequestDto exercisePutRequestDto) {
         ExerciseResponseDto exerciseResponseDto = exerciseService.editarExercicio(id, exercisePutRequestDto);
         return ResponseEntity.status(201).body(exerciseResponseDto);
     }
 
-    @PreAuthorize("hasAnyRole('PROFESSOR')")
+//    @PreAuthorize("hasAnyRole('PROFESSOR')")
     @DeleteMapping("/exercise/{id}")
     public ResponseEntity<ExerciseResponseDto> deletarExercicio(@PathVariable Integer id){
         ExerciseResponseDto exerciseResponseDto = exerciseService.excluirExercicio(id);
         return ResponseEntity.status(201).body(exerciseResponseDto);
     }
 
-    @PreAuthorize("hasAnyRole('ALUNO', 'PROFESSOR')")
+//    @PreAuthorize("hasAnyRole('ALUNO', 'PROFESSOR')")
     @GetMapping("/exercise/{id}")
     public ResponseEntity<ExerciseResponseDto> buscarExercicio(@PathVariable Integer id){
         ExerciseResponseDto exerciseResponseDto = exerciseService.buscarExercicio(id);
