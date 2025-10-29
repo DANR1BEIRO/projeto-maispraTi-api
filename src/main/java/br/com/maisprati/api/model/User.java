@@ -2,6 +2,7 @@ package br.com.maisprati.api.model;
 
 import br.com.maisprati.api.enuns.PostgreSQLEnumType;
 import br.com.maisprati.api.enuns.RoleEnum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Type;
@@ -19,7 +20,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User implements UserDetails {
+public class User extends BaseEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,11 +48,13 @@ public class User implements UserDetails {
     @Column(name = "\"grupoAtualId\"")
     private Integer grupoAtualId;
 
-    @Column(name = "\"createdAt\"", nullable = false)
-    private LocalDateTime createdAt;
-
-    @Column(name = "\"updatedAt\"")
-    private LocalDateTime updatedAt;
+    @JsonIgnore // evita loop infinito na serializacao
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<UserExerciseResult> results;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
