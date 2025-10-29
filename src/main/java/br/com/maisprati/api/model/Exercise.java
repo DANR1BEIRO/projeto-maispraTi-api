@@ -2,20 +2,21 @@ package br.com.maisprati.api.model;
 
 import br.com.maisprati.api.enuns.ExerciseTypeEnum;
 import br.com.maisprati.api.enuns.PostgreSQLExerciseTypeEnum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.Type;
 
 import java.util.List;
 
 @Entity
 @Table(name = "\"Exercise\"")
-@Data
+// @Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Exercise {
+public class Exercise extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,6 +36,15 @@ public class Exercise {
     private String respostaCorreta;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "\"grupo_id\"")
     private ExerciseGroup grupo;
+
+    @JsonIgnore
+    @OneToMany(
+            mappedBy = "exercise",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<UserExerciseResult> results;
 }
