@@ -2,18 +2,18 @@ package br.com.maisprati.api.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Table(name = "\"ExerciseGroup\"")
-@Data
+// @Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ExerciseGroup {
+public class ExerciseGroup extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,8 +33,7 @@ public class ExerciseGroup {
     @JsonIgnore
     private ExerciseList exerciseList;
 
-//    @Column(name = "exercicios")
-    @OneToMany(mappedBy = "grupo",  cascade = CascadeType.ALL, orphanRemoval = true)
+    //    @Column(name = "exercicios")
+    @OneToMany(mappedBy = "grupo", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Exercise> exercises;
-
 }
