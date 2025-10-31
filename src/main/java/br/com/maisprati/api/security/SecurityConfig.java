@@ -42,7 +42,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/admin/exercise/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/exercises/**").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/api/exercises/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
