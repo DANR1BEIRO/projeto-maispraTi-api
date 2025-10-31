@@ -9,8 +9,11 @@ import br.com.maisprati.api.model.ExerciseGroup;
 import br.com.maisprati.api.repository.ExerciseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +21,7 @@ public class ExerciseService {
 
     private final ExerciseRepository exerciseRepository;
     private final ExerciseMapper mapper;
+    private final ExerciseGroupService exerciseGroupService;
 
     public ExerciseResponseDto criarExercicio(ExerciseRequestDto exerciseRequestDto){
 
@@ -127,5 +131,21 @@ public class ExerciseService {
 //        exerciseResponseDto.setRespostaCorreta(exerciseResponse.getRespostaCorreta());
         ExerciseResponseDto exerciseResponseDto = mapper.toResponse(exerciseResponse);
         return exerciseResponseDto;
+    }
+
+    /**
+     * Lista todos os exercícios de um grupo específico.
+     * @return Uma lista de ExerciseResponseDto (pode ser vazia).
+     */
+
+    @Transactional(readOnly = true)
+    public List<ExerciseResponseDto> listarExerciciosPorGrupo(Integer grupoId) {
+        ExerciseGroup grupo = exerciseGroupService.buscarGrupoPorId(grupoId);
+        List<Exercise> exercises = exerciseRepository.findByGrupoId(grupo.getId());
+
+        // Converte a lista de Entidades (Exercise) para lista de DTO
+        return exercises.stream()
+                .map(mapper::toResponse)
+                .collect(Collectors.toList());
     }
 }
