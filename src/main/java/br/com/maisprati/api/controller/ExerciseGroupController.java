@@ -14,22 +14,29 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/admin/")
+@RequestMapping("/api/")
 @RequiredArgsConstructor
 public class ExerciseGroupController {
 
     private final ExerciseGroupService exerciseGroupService;
 
-    @PostMapping("/exercise/group")
+    @PostMapping("/admin/exercise/group")
     public ResponseEntity<ExerciseGroupResponseDto> criarGrupoExercicios(@Valid @RequestBody ExerciseGroupRequestDto exerciseGroupRequestDto) {
         ExerciseGroupResponseDto exerciseGroupResponseDto = exerciseGroupService.criarGrupoExercicios(exerciseGroupRequestDto);
         return ResponseEntity.status(201).body(exerciseGroupResponseDto);
     }
 
-    @GetMapping("/exercise/group")
+    @GetMapping("/admin/exercise/group")
     public ResponseEntity<List<ExerciseGroupResponseDto>> buscarTodosGruposExercicios(){
         List<ExerciseGroupResponseDto> exerciseGroupResponseDto = exerciseGroupService.buscarTodosGruposExercicios();
         return ResponseEntity.status(200).body(exerciseGroupResponseDto);
 
     }
+
+//    @GetMapping("/admin/exercise/group/{id}")
+//    public ResponseEntity<ExerciseGroupResponseDto> buscarGrupoPorId(@Valid @PathVariable Integer id){
+//        ExerciseGroupResponseDto exerciseGroupResponseDto = exerciseGroupService.buscarGrupoPorIdDTO(id);
+//        return ResponseEntity.status(200).body(exerciseGroupResponseDto);
+//    }
+
 }

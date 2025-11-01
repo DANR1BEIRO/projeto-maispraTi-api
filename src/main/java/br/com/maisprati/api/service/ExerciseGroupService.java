@@ -39,11 +39,17 @@ public class ExerciseGroupService {
      * @return A entidade ExerciseGroup (nunca null).
      */
 
-    @Transactional(readOnly = true)
-    public ExerciseGroup buscarGrupoPorId(Integer id) {
+//    @Transactional(readOnly = true)
+//    public ExerciseGroup buscarGrupoPorId(Integer id) {
+//
+//        // Usa findById e lança a exceção se não encontrar.
+//        return exerciseGroupRepository.findById(id)
+//                .orElseThrow(() -> new NoSuchElementException("Grupo de exercício não encontrado com ID: " + id));
+//    }
+//
+//    public ExerciseGroupResponseDto buscarGrupoPorIdDTO(Integer id) {
+//        ExerciseGroup grupo = buscarGrupoPorId(id);
+//        return mapper.toResponse(grupo);
+//    }
 
-        // Usa findById e lança a exceção se não encontrar.
-        return exerciseGroupRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Grupo de exercício não encontrado com ID: " + id));
-    }
 }

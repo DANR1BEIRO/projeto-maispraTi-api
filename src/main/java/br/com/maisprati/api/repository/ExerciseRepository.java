@@ -8,5 +8,5 @@ import java.util.List;
 public interface ExerciseRepository extends JpaRepository<Exercise, Integer> {
     Exercise findByPergunta(String pergunta);
 
-    List<Exercise> findByGrupoId(Integer grupoId);
+//    List<Exercise> findByGrupoId(Integer grupoId);
 }

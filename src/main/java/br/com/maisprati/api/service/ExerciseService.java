@@ -69,11 +69,11 @@ public class ExerciseService {
             exercise.setRespostaCorreta(exerciseRequestDto.getRespostaCorreta());
         }
 
-        if (exerciseRequestDto.getGrupoId() != null){
-            ExerciseGroup group = new ExerciseGroup();
-            group.setId(exerciseRequestDto.getGrupoId());
-            exercise.setGrupo(group);
-        }
+//        if (exerciseRequestDto.getGrupoId() != null){
+//            ExerciseGroup group = new ExerciseGroup();
+//            group.setId(exerciseRequestDto.getGrupoId());
+//            exercise.setGrupo(group);
+//        }
 
         //Executa save da repository para salvar exercício na base
         Exercise exerciseResponse = exerciseRepository.save(exercise);
@@ -138,14 +138,14 @@ public class ExerciseService {
      * @return Uma lista de ExerciseResponseDto (pode ser vazia).
      */
 
-    @Transactional(readOnly = true)
-    public List<ExerciseResponseDto> listarExerciciosPorGrupo(Integer grupoId) {
-        ExerciseGroup grupo = exerciseGroupService.buscarGrupoPorId(grupoId);
-        List<Exercise> exercises = exerciseRepository.findByGrupoId(grupo.getId());
-
-        // Converte a lista de Entidades (Exercise) para lista de DTO
-        return exercises.stream()
-                .map(mapper::toResponse)
-                .collect(Collectors.toList());
-    }
+//    @Transactional(readOnly = true)
+//    public List<ExerciseResponseDto> listarExerciciosPorGrupo(Integer grupoId) {
+//        ExerciseGroup grupo = exerciseGroupService.buscarGrupoPorId(grupoId);
+//        List<Exercise> exercises = exerciseRepository.findByGrupoId(grupo.getId());
+//
+//        // Converte a lista de Entidades (Exercise) para lista de DTO
+//        return exercises.stream()
+//                .map(mapper::toResponse)
+//                .collect(Collectors.toList());
+//    }
 }

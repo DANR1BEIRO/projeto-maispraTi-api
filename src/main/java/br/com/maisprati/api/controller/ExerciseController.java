@@ -19,12 +19,12 @@ public class ExerciseController {
 
     private final ExerciseService exerciseService;
 
-    @PreAuthorize("isAuthenticated()")
-    @GetMapping("/exercises/{grupoId}")
-    public ResponseEntity<List<ExerciseResponseDto>> listarPorGrupo(@PathVariable Integer grupoId) {
-        List<ExerciseResponseDto> exercises = exerciseService.listarExerciciosPorGrupo(grupoId);
-        return ResponseEntity.ok(exercises);
-    }
+//    @PreAuthorize("isAuthenticated()")
+//    @GetMapping("/exercises/{grupoId}")
+//    public ResponseEntity<List<ExerciseResponseDto>> listarPorGrupo(@PathVariable Integer grupoId) {
+//        List<ExerciseResponseDto> exercises = exerciseService.listarExerciciosPorGrupo(grupoId);
+//        return ResponseEntity.ok(exercises);
+//    }
 
 //    @PreAuthorize("hasAnyRole('PROFESSOR')")
     @PostMapping("/admin/exercise")

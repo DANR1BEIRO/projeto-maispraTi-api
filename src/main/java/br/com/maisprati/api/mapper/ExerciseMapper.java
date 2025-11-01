@@ -10,14 +10,16 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface ExerciseMapper {
 
-    @Mapping(source = "grupoId", target = "grupo")
+//    @Mapping(source = "grupoId", target = "grupo")
+    @Mapping(source = "listaId", target = "listaId")
     @Mapping(source = "pergunta", target = "pergunta")
     @Mapping(source = "alternativas", target = "alternativas")
     @Mapping(source = "respostaCorreta", target = "respostaCorreta")
     Exercise toEntity(ExerciseRequestDto exerciseRequestDto);
 
     @Mapping(source = "id", target = "id")
-    @Mapping(source = "grupo.id", target = "grupoId")
+//    @Mapping(source = "grupo.id", target = "grupoId")
+    @Mapping(source = "listaId", target = "listaId")
     @Mapping(source = "pergunta", target = "pergunta")
     @Mapping(source = "alternativas", target = "alternativas")
     @Mapping(source = "respostaCorreta", target = "respostaCorreta")

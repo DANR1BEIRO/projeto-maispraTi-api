@@ -21,6 +21,9 @@ public class ExerciseRequestDto {
     @NotBlank(message = "Resposta correta é obrigatório")
     private String respostaCorreta;
 
-    @NotNull(message = "Id do grupo é obrigatório")
-    private Integer grupoId;
+//    @NotNull(message = "Id do grupo é obrigatório")
+//    private Integer grupoId;
+
+    @NotNull(message = "Id da lista é obrigatório")
+    private Integer listaId;
 }

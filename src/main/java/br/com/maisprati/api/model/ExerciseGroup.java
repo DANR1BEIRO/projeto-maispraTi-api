@@ -34,6 +34,6 @@ public class ExerciseGroup extends BaseEntity {
     private ExerciseList exerciseList;
 
     //    @Column(name = "exercicios")
-    @OneToMany(mappedBy = "grupo", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Exercise> exercises;
+//    @OneToMany(mappedBy = "grupo", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Exercise> exercises;
 }
