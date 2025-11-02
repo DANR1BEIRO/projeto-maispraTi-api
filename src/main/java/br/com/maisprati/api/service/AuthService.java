@@ -63,30 +63,20 @@ public class AuthService implements UserDetailsService {
         return new LoginResponseDto(token);
     }
 
-    public UserResponseDto getUserById(Integer id){
-        Optional<User> userById = userRepository.findById(id);
+    // Agora o metodo lança exceção se o usuário não existir,
+    // evitando null e fluxo inconsistente
+    public UserResponseDto getUserById(Integer id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuário não existe"));
 
-        if(userById.isEmpty()){
-            System.out.println("Usuário não existe");
-        }
-
-        User userResponse = userRepository.getReferenceById(id);
-
-//        UserResponseDto userResponseDto = new UserResponseDto();
-//
-//        userResponseDto.setId(userResponse.getId());
-//        userResponseDto.setNome(userResponse.getNome());
-//        userResponseDto.setEmail(userResponse.getEmail());
-//        userResponseDto.setFotoPerfil(userResponse.getFotoPerfil());
-//        userResponseDto.setStreakAtual(userResponse.getStreakAtual());
-        UserResponseDto userResponseDto = mapper.toResponse(userResponse);
+        UserResponseDto userResponseDto = mapper.toResponse(user);
         return userResponseDto;
     }
 
     public List<UserResponseDto> buscarUsuarios() {
         List<User> usuarios = userRepository.findAll();
         List<UserResponseDto> listUsers = new ArrayList<>();
-        for(int i = 0; i < usuarios.size(); i++){
+        for (int i = 0; i < usuarios.size(); i++) {
 //            UserResponseDto userResponseDto = new UserResponseDto();
 //            userResponseDto.setId(usuarios.get(i).getId());
 //            userResponseDto.setNome(usuarios.get(i).getNome());
