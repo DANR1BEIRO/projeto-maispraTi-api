@@ -35,8 +35,10 @@ public class Exercise extends BaseEntity {
     @Column(name = "\"resposta_correta\"")
     private String respostaCorreta;
 
-    @Column(name = "\"lista_id\"")
-    private Integer listaId;
+    @ManyToOne
+    @JoinColumn(name = "\"lista_id\"")
+    @JsonIgnore
+    private ExerciseList exerciseListId;
 
 //    @ManyToOne
 //    @JsonIgnore

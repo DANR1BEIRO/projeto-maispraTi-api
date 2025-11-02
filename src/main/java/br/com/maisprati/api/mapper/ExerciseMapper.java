@@ -11,15 +11,16 @@ import org.mapstruct.Mapping;
 public interface ExerciseMapper {
 
 //    @Mapping(source = "grupoId", target = "grupo")
-    @Mapping(source = "listaId", target = "listaId")
+//    @Mapping(source = "listaId", target = "listaId")
     @Mapping(source = "pergunta", target = "pergunta")
     @Mapping(source = "alternativas", target = "alternativas")
     @Mapping(source = "respostaCorreta", target = "respostaCorreta")
+    @Mapping(source = "listaId", target = "exerciseListId.id")
     Exercise toEntity(ExerciseRequestDto exerciseRequestDto);
 
     @Mapping(source = "id", target = "id")
 //    @Mapping(source = "grupo.id", target = "grupoId")
-    @Mapping(source = "listaId", target = "listaId")
+    @Mapping(source = "exerciseListId.id", target = "listaId")
     @Mapping(source = "pergunta", target = "pergunta")
     @Mapping(source = "alternativas", target = "alternativas")
     @Mapping(source = "respostaCorreta", target = "respostaCorreta")

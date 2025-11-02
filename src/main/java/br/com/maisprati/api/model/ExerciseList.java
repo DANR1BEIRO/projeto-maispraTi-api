@@ -23,6 +23,11 @@ public class ExerciseList extends BaseEntity {
     @Column(name = "\"descricao\"", nullable = false)
     private String descricao;
 
+    @Column(name = "\"exercicios\"")
+    @OneToMany(mappedBy = "exerciseListId")
+    private List<Exercise> exercicios;
+
+
     // @Column(name = "\"grupos\"")
     @OneToMany(
             mappedBy = "exerciseList",

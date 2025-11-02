@@ -43,6 +43,7 @@ public interface ExerciseListMapper {
     @Mapping(source = "titulo", target = "titulo")
     @Mapping(source = "descricao", target = "descricao")
     @Mapping(source = "grupos", target = "grupos")
+//    @Mapping(source = "exercicios", target = "exercicios")
     ExerciseList toEntity(ExerciseListRequestDto dto);
 
     // Entity → Response
@@ -50,8 +51,9 @@ public interface ExerciseListMapper {
     @Mapping(source = "titulo", target = "titulo")
     @Mapping(source = "descricao", target = "descricao")
     @Mapping(source = "grupos", target = "grupos") // usa o ExerciseGroupMapper
-    @Mapping(source = "createdAt", target = "dataCriacao")
-    @Mapping(source = "updatedAt", target = "dataAtualizacao")
+//    @Mapping(source = "createdAt", target = "dataCriacao")
+//    @Mapping(source = "updatedAt", target = "dataAtualizacao")
+    @Mapping(source = "exercicios", target = "exercicios")
     ExerciseListResponseDto toResponse(ExerciseList entity);
 
     List<ExerciseListResponseDto> toResponseList(List<ExerciseList> entities);
