@@ -13,5 +13,7 @@ public class ExerciseListResponseDto {
     private String titulo;
     private String descricao;
     private List<ExerciseGroupResponseDto> grupos;
-    private List<ExerciseResponseDto> exercicios;
+//    private List<ExerciseResponseDto> exercicios;
+    private List<Integer> exerciciosIds;
+
 }
