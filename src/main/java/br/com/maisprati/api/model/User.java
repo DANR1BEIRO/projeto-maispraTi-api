@@ -1,16 +1,13 @@
 package br.com.maisprati.api.model;
 
-import br.com.maisprati.api.enuns.PostgreSQLEnumType;
 import br.com.maisprati.api.enuns.RoleEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.Type;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -38,7 +35,13 @@ public class User extends BaseEntity implements UserDetails {
     @Column(name = "\"fotoPerfil\"")
     private String fotoPerfil;
 
-    @Type(PostgreSQLEnumType.class)
+    /**
+     * No banco Postgres usamos ENUM, mas o H2 (banco de testes) não entende enums customizados.
+     * Por isso anotei com @Enumerated(EnumType.STRING) sem @Type(PostgreSQLEnumType.class),
+     * garantindo compatibilidade com os dois ambientes.
+     */
+    @Enumerated(EnumType.STRING)
+    //@Type(PostgreSQLEnumType.class)
     @Column(name = "\"role\"", columnDefinition = "role")
     private RoleEnum role;
 
