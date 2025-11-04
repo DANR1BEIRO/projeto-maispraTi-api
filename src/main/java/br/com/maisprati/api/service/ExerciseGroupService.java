@@ -6,7 +6,6 @@ import br.com.maisprati.api.dto.ExerciseGroupResponseDto;
 import br.com.maisprati.api.mapper.ExerciseGroupMapper;
 import br.com.maisprati.api.model.ExerciseGroup;
 import br.com.maisprati.api.model.User;
-import br.com.maisprati.api.model.UserExerciseResult;
 import br.com.maisprati.api.repository.ExerciseGroupRepository;
 import br.com.maisprati.api.repository.ExerciseRepository;
 import br.com.maisprati.api.repository.UserExerciseResultRepository;
@@ -54,4 +53,14 @@ public class ExerciseGroupService {
     public Optional<ExerciseGroup> buscarProximoGrupoPorOrdem(Integer ordemAtual) {
         return exerciseGroupRepository.findTopByOrdemGreaterThanOrderByOrdemAsc(ordemAtual);
     }
+
+    public List<String> calcularGruposBloqueados(User user, List<String> gruposConcluidos) {
+        List<ExerciseGroup> todosGrupos = exerciseGroupRepository.findAll();
+
+        return todosGrupos.stream()
+                .map(ExerciseGroup::getTitle)
+                .filter(titulo -> !gruposConcluidos.contains(titulo))
+                .toList();
+    }
+
 }
