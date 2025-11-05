@@ -1,6 +1,7 @@
 package br.com.maisprati.api.repository;
 
 import br.com.maisprati.api.model.ExerciseGroup;
+import br.com.maisprati.api.model.ExerciseList;
 import br.com.maisprati.api.model.User;
 import br.com.maisprati.api.model.UserExerciseResult;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,8 +14,8 @@ public interface UserExerciseResultRepository extends JpaRepository<UserExercise
      * por um usuário dentro de um grupo de exercícios específico.
      */
     @Query("SELECT COUNT(r) FROM UserExerciseResult r WHERE r.user = :user AND r.exercise.grupo = :exerciseGroup AND r.isCorrect = true")
-    int countSuccessfulByUserAndGroup(
+    int countSuccessfulByUserAndList(
             @Param("user") User user,
-            @Param("exerciseGroup") ExerciseGroup exerciseGroup
+            @Param("exerciseGroup") ExerciseList list
     );
 }

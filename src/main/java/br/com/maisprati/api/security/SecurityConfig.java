@@ -46,11 +46,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/admin/exercise/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
-<<<<<<< HEAD
                         .requestMatchers(HttpMethod.GET, "/api/exercises/**").permitAll()
-=======
                         .requestMatchers(HttpMethod.GET, "/api/journey/**").permitAll()
->>>>>>> fabf9f0 (feat(journey): Implementa fluxo completo de progresso e avanco de usuario)
                         .anyRequest().authenticated()
                 );
 
@@ -60,7 +57,6 @@ public class SecurityConfig {
 
         return chain.build();
     }
-
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();

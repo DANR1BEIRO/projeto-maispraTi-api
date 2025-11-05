@@ -5,24 +5,22 @@ import br.com.maisprati.api.dto.ExerciseGroupResponseDto;
 
 import br.com.maisprati.api.mapper.ExerciseGroupMapper;
 import br.com.maisprati.api.model.ExerciseGroup;
+import br.com.maisprati.api.model.ExerciseList;
 import br.com.maisprati.api.model.User;
 import br.com.maisprati.api.model.UserExerciseResult;
 import br.com.maisprati.api.repository.ExerciseGroupRepository;
-<<<<<<< HEAD
+import br.com.maisprati.api.repository.ExerciseListRepository;
 import org.springframework.transaction.annotation.Transactional;
-=======
 import br.com.maisprati.api.repository.ExerciseRepository;
 import br.com.maisprati.api.repository.UserExerciseResultRepository;
->>>>>>> fabf9f0 (feat(journey): Implementa fluxo completo de progresso e avanco de usuario)
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-<<<<<<< HEAD
+
 import java.util.NoSuchElementException;
-=======
+
 import java.util.Optional;
->>>>>>> fabf9f0 (feat(journey): Implementa fluxo completo de progresso e avanco de usuario)
 
 @Service
 @RequiredArgsConstructor
@@ -31,6 +29,7 @@ public class ExerciseGroupService {
     private final ExerciseGroupMapper mapper;
     private final UserExerciseResultRepository userExerciseResultRepository;
     private final ExerciseRepository exerciseRepository;
+    private final ExerciseListRepository exerciseListRepository;
 
     public ExerciseGroupResponseDto criarGrupoExercicios(ExerciseGroupRequestDto exerciseGroupRequestDto) {
         ExerciseGroup exerciseGroup = mapper.toEntity(exerciseGroupRequestDto);
@@ -39,16 +38,16 @@ public class ExerciseGroupService {
         return exerciseGroupResponseDto;
     }
 
-    public List<ExerciseGroupResponseDto> buscarTodosGruposExercicios(){
+    public List<ExerciseGroupResponseDto> buscarTodosGruposExercicios() {
         List<ExerciseGroup> exerciseGroupList = exerciseGroupRepository.findAll();
         List<ExerciseGroupResponseDto> exerciseGroupResponseDtoList = mapper.toResponseList(exerciseGroupList);
         return exerciseGroupResponseDtoList;
     }
 
-<<<<<<< HEAD
     /**
      * Busca a entidade ExerciseGroup pelo ID e valida sua existência.
      * Usa orElseThrow() para tratamento limpo de recurso não encontrado.
+     *
      * @param id O ID do grupo.
      * @return A entidade ExerciseGroup (nunca null).
      */
@@ -65,17 +64,16 @@ public class ExerciseGroupService {
 //        ExerciseGroup grupo = buscarGrupoPorId(id);
 //        return mapper.toResponse(grupo);
 //    }
+    public boolean usuarioConcluiuTodosRequisitos(User user, String listaTitulo) {
+        ExerciseList lista = exerciseListRepository.findByTitulo(listaTitulo)
+                .orElseThrow(() -> new RuntimeException("Lista não encontrada: " + listaTitulo));
 
-=======
-    public boolean usuarioConcluiuTodosRequisitos(User user, String grupoTitulo) {
-        ExerciseGroup grupo = exerciseGroupRepository.findByTitulo(grupoTitulo)
-                .orElseThrow(() -> new RuntimeException("Grupo de exercício não encontrado pelo título: " + grupoTitulo));
+        int totalExercicios = exerciseRepository.countByExerciseListId(lista);
+        int concluidos = userExerciseResultRepository.countSuccessfulByUserAndList(user, lista);
 
-        int totalExerciciosNoGrupo = exerciseRepository.countByGrupo(grupo);
-        int concluidosPeloUsuario = userExerciseResultRepository.countSuccessfulByUserAndGroup(user, grupo);
-
-        return totalExerciciosNoGrupo > 0 && concluidosPeloUsuario >= totalExerciciosNoGrupo;
+        return totalExercicios > 0 && concluidos >= totalExercicios;
     }
+
 
     public Optional<ExerciseGroup> findByTitulo(String titulo) {
         return exerciseGroupRepository.findByTitulo(titulo);
@@ -84,5 +82,4 @@ public class ExerciseGroupService {
     public Optional<ExerciseGroup> buscarProximoGrupoPorOrdem(Integer ordemAtual) {
         return exerciseGroupRepository.findTopByOrdemGreaterThanOrderByOrdemAsc(ordemAtual);
     }
->>>>>>> fabf9f0 (feat(journey): Implementa fluxo completo de progresso e avanco de usuario)
 }
