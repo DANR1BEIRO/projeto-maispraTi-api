@@ -25,19 +25,20 @@ public class JourneyProgress {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(name = "grupo_atual", length = 50)
-    private String grupoAtual;
+    @Column(name = "lista_atual", length = 50)
+    private String listaAtual;
 
     /**
-     * @ElementCollection: indica que o campo não é um relacionamento com outra entidade,
-     * mas uma coleção de elementos simples
-     * Sinaliza para o hibernate que ele deve criar uma nova tabela no db para
-     * armazenar os valores da lista.
+     * Lista de títulos das listas já concluídas pelo usuário.
+     * Armazenada em tabela auxiliar via @ElementCollection.
      */
     @ElementCollection
     @CollectionTable(
-            name = "grupos_concluidos_progresso",
+            name = "progresso_listas_concluidas",
             joinColumns = @JoinColumn(name = "progresso_id"))
-    @Column(name = "grupo")
-    private List<String> gruposConcluidos = new ArrayList<>();
+    @Column(name = "lista_concluida")
+    private List<String> listasDeExerciciosConcluidos = new ArrayList<>();
 }
+
+
+

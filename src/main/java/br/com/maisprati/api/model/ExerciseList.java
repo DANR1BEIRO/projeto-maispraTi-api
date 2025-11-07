@@ -7,12 +7,12 @@ import java.util.List;
 
 @Entity
 @Table(name = "\"ExerciseList\"")
-// @Data
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ExerciseList extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -23,16 +23,15 @@ public class ExerciseList extends BaseEntity {
     @Column(name = "\"descricao\"", nullable = false)
     private String descricao;
 
-    @Column(name = "\"exercicios\"")
-    @OneToMany(mappedBy = "exerciseListId")
-    private List<Exercise> exercicios;
+    @Column(name = "\"ordem\"", nullable = false)
+    private Integer ordem;
 
 
-    // @Column(name = "\"grupos\"")
     @OneToMany(
-            mappedBy = "exerciseList",
+            mappedBy = "exerciseListId",
             cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    private List<ExerciseGroup> grupos;
+            orphanRemoval = true
+    )
+    private List<Exercise> exercicios;
 
 }

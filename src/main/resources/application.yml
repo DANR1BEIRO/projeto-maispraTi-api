@@ -1,11 +1,11 @@
 spring:
   profiles:
-    active: ${SPRING_PROFILES_ACTIVE:dev}
+    active: dev
 
   datasource:
-    url: ${DB_URL}
-    username: ${DB_USER}
-    password: ${DB_PASSWORD}
+    url: jdbc:postgresql://localhost:5432/maispra_ti_db
+    username: postgres
+    password: postgres
 
   jpa:
     hibernate:
@@ -18,8 +18,18 @@ spring:
         format_sql: true
 
 server:
-  port: ${PORT:8080}
+  port: 8080
 
 jwt:
-  secret: ${JWT_SECRET:minha-chave-secreta-super-longa-e-segura-para-api-prati-123}
-  expiration: ${JWT_EXPIRATION:86400000}
+  secret: minha-chave-secreta-super-longa-e-segura-para-api-prati-123
+  expiration: 86400000
+
+# LIBERA O HEALTH CHECK
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: health,info

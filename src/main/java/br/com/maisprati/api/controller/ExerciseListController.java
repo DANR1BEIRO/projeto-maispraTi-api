@@ -20,18 +20,18 @@ import java.util.List;
 public class ExerciseListController {
 
     private final ExerciseListService exerciseListService;
+
     @PostMapping("/exercise/list")
     public ResponseEntity<ExerciseListResponseDto> criarListaExercicio(
             @Valid @RequestBody ExerciseListRequestDto exerciseListRequestDto) {
 
-        ExerciseListResponseDto exerciseListResponseDto = exerciseListService.criarListaExercicios(exerciseListRequestDto);
+        ExerciseListResponseDto exerciseListResponseDto = exerciseListService.criarLista(exerciseListRequestDto);
         return ResponseEntity.status(201).body(exerciseListResponseDto);
     }
 
     @GetMapping("/exercise/list")
-    public ResponseEntity<List<ExerciseListResponseDto>> buscarTodasListasExercicios(){
-        List<ExerciseListResponseDto> exerciseListResponseDto = exerciseListService.buscarTodasListasExercicios();
+    public ResponseEntity<List<ExerciseListResponseDto>> buscarTodasListasExercicios() {
+        List<ExerciseListResponseDto> exerciseListResponseDto = exerciseListService.buscarTodasAsListas();
         return ResponseEntity.status(200).body(exerciseListResponseDto);
     }
-
 }

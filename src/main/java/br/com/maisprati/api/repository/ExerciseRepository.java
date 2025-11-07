@@ -1,11 +1,8 @@
 package br.com.maisprati.api.repository;
 
 import br.com.maisprati.api.model.Exercise;
-import br.com.maisprati.api.model.ExerciseGroup;
 import br.com.maisprati.api.model.ExerciseList;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.List;
 
 public interface ExerciseRepository extends JpaRepository<Exercise, Integer> {
     Exercise findByPergunta(String pergunta);

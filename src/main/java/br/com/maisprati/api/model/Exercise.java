@@ -40,11 +40,6 @@ public class Exercise extends BaseEntity {
     @JsonIgnore
     private ExerciseList exerciseListId;
 
-//    @ManyToOne
-//    @JsonIgnore
-//    @JoinColumn(name = "\"grupo_id\"")
-//    private ExerciseGroup grupo;
-
     @JsonIgnore
     @OneToMany(
             mappedBy = "exercise",

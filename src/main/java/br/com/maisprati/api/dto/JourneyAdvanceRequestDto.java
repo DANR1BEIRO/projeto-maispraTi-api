@@ -1,12 +1,18 @@
 package br.com.maisprati.api.dto;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
+
+// DTO enviado pelo cliente para avançar a jornada.
+// Antes usava grupoTentandoConcluir, mas agora a jornada funciona por listas.
+// Por isso foi renomeado para listaTentandoConcluir.
 
 @Getter
-@Setter
+@NoArgsConstructor
 public class JourneyAdvanceRequestDto {
-    @NotBlank(message = "O nome do grupo é obrigatório")
-    private String grupoTentandoConcluir;
+
+    /**
+     * Nome da lista que o usuário está tentando concluir
+     */
+    private String listaTentandoConcluir;
 }
