@@ -1,7 +1,9 @@
 package br.com.maisprati.api.dto;
 
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
+@Data
 public class UserAnswerRequestDto {
     @NotNull(message = "idUsuario é um campo obrigatório.")
     private Integer idUsuario;
@@ -10,5 +12,5 @@ public class UserAnswerRequestDto {
     private Integer idExercicio;
 
     @NotNull(message = "respostaUsuario é um campo obrigatório.")
-    private Integer respostaUsuario;
+    private String respostaUsuario;
 }

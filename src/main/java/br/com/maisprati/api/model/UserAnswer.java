@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "UserAnswer")
+@Table(name = "\"UserAnswer\"")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -18,13 +18,16 @@ public class UserAnswer {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "id_usuario")
     private User userId;
 
     @ManyToOne
-    @JoinColumn(name = "exercise_id")
+    @JoinColumn(name = "id_exercicio")
     private Exercise exerciseId;
 
     @Column(name = "resposta_usuario")
     private String userAnswer;
+
+    @Column(name = "resposta_correta")
+    private boolean correctAnswer;
 }
