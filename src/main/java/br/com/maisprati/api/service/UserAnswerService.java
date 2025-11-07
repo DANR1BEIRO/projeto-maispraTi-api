@@ -11,6 +11,8 @@ import br.com.maisprati.api.repository.UserAnswerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class UserAnswerService {
@@ -41,8 +43,10 @@ public class UserAnswerService {
         return userAnswerResponseDto;
     }
 
-//    public UserAnswerResponseDto buscarResposta(Integer id){
-//
-//        return ;
-//    }
+    public UserAnswerResponseDto buscarResposta(Integer id){
+        Optional<UserAnswer> userAnswer = userAnswerRepository.findById(id);
+        UserAnswer userAnswerResponse = userAnswerRepository.getReferenceById(id);
+        UserAnswerResponseDto userAnswerResponseDto = userAnswerMapper.toResponse(userAnswerResponse);
+        return userAnswerResponseDto;
+    }
 }
