@@ -53,7 +53,11 @@ public interface ExerciseListMapper {
     @Mapping(source = "grupos", target = "grupos") // usa o ExerciseGroupMapper
 //    @Mapping(source = "createdAt", target = "dataCriacao")
 //    @Mapping(source = "updatedAt", target = "dataAtualizacao")
-    @Mapping(source = "exercicios", target = "exercicios")
+//    @Mapping(source = "exercicios", target = "exercicios")
+    @Mapping(
+            target = "exerciciosIds",
+            expression = "java(entity.getExercicios().stream().map(e -> e.getId()).toList())"
+    )
     ExerciseListResponseDto toResponse(ExerciseList entity);
 
     List<ExerciseListResponseDto> toResponseList(List<ExerciseList> entities);
