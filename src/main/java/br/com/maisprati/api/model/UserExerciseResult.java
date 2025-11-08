@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "\"UserExerciseResult\"")
+@Table(name = "user_exercise_result")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,16 +16,14 @@ public class UserExerciseResult extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    // Associacao com User
     @ManyToOne
-    @JoinColumn(name = "\"userId\"", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    // Associacao com Exercise
     @ManyToOne
-    @JoinColumn(name = "\"exerciseId\"", nullable = false)
+    @JoinColumn(name = "exercise_id", nullable = false)
     private Exercise exercise;
 
-    @Column(name = "\"foiCorreto\"", nullable = false)
-    private boolean isCorrect;
+    @Column(name = "successful", nullable = false)
+    private boolean successful;
 }

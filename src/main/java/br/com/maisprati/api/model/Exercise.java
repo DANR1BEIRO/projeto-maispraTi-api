@@ -10,7 +10,8 @@ import org.hibernate.annotations.Type;
 import java.util.List;
 
 @Entity
-@Table(name = "\"Exercise\"")
+@Table(name = "exercise")
+
 // @Data
 @Getter
 @Setter
@@ -23,20 +24,20 @@ public class Exercise extends BaseEntity {
     private Integer id;
 
     @Type(PostgreSQLExerciseTypeEnum.class)
-    @Column(name = "\"tipo\"", columnDefinition = "tipo")
+    @Column(name = "tipo", columnDefinition = "tipo")
     private ExerciseTypeEnum tipo;
 
-    @Column(name = "\"pergunta\"", unique = true)
+    @Column(name = "pergunta", unique = true)
     private String pergunta;
 
-    @Column(name = "\"opcoes\"")
+    @Column(name = "opcoes")
     private List<String> alternativas;
 
-    @Column(name = "\"resposta_correta\"")
+    @Column(name = "resposta_correta")
     private String respostaCorreta;
 
     @ManyToOne
-    @JoinColumn(name = "\"lista_id\"")
+    @JoinColumn(name = "lista_id")
     @JsonIgnore
     private ExerciseList exerciseListId;
 

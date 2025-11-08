@@ -24,6 +24,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final AuthService authService;
 
     @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        String path = request.getRequestURI();
+        return path.equals("/api/auth/login") ||
+                path.equals("/api/auth/register") ||
+                path.startsWith("/actuator/") ||
+                path.startsWith("/api/admin/exercise/");
+    }
+
+    @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain)
@@ -50,7 +59,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 }
             }
         } catch (Exception e) {
-            logger.error("Erro ao validar token JWT: {}", e);
+            logger.error("Erro ao validar token JWT: {}");
         }
 
         filterChain.doFilter(request, response);

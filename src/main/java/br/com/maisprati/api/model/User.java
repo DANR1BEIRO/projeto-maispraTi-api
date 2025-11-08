@@ -1,21 +1,18 @@
 package br.com.maisprati.api.model;
 
-import br.com.maisprati.api.enuns.PostgreSQLEnumType;
 import br.com.maisprati.api.enuns.RoleEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.Type;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(name = "\"UserSystem\"")
+@Table(name = "users")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -26,27 +23,28 @@ public class User extends BaseEntity implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "\"nomeCompleto\"", nullable = false)
+    @Column(name = "nome_completo", nullable = false)
     private String nomeCompleto;
 
-    @Column(name = "\"email\"", unique = true, nullable = false)
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-    @Column(name = "\"senhaHash\"", nullable = false)
+    @Column(name = "senha_hash", nullable = false)
     private String senhaHash;
 
-    @Column(name = "\"fotoPerfil\"")
+    @Column(name = "foto_perfil")  // ← CORRIGIDO: sem aspas, snake_case
     private String fotoPerfil;
 
-    @Type(PostgreSQLEnumType.class)
-    @Column(name = "\"role\"", columnDefinition = "role")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", columnDefinition = "varchar(20) default 'ALUNO'")
     private RoleEnum role;
 
-    @Column(name = "\"streakAtual\"")
+    @Column(name = "streak_atual")
     private Integer streakAtual;
 
-    @Column(name = "\"grupoAtualId\"")
+    @Column(name = "grupo_atual_id")
     private Integer grupoAtualId;
+
 
     @JsonIgnore // evita loop infinito na serializacao
     @OneToMany(

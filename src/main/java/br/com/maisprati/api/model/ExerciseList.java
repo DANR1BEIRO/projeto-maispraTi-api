@@ -6,7 +6,7 @@ import lombok.*;
 import java.util.List;
 
 @Entity
-@Table(name = "\"ExerciseList\"")
+@Table(name = "lista_exercicios")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -17,13 +17,13 @@ public class ExerciseList extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "\"titulo\"", nullable = false)
+    @Column(name = "titulo", nullable = false)
     private String titulo;
 
-    @Column(name = "\"descricao\"", nullable = false)
+    @Column(name = "descricao", nullable = false)
     private String descricao;
 
-    @Column(name = "\"ordem\"", nullable = false)
+    @Column(name = "ordem", nullable = false)
     private Integer ordem;
 
 

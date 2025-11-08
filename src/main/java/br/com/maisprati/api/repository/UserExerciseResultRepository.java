@@ -14,7 +14,7 @@ public interface UserExerciseResultRepository extends JpaRepository<UserExercise
             FROM UserExerciseResult r
             WHERE r.user = :user
               AND r.exercise.exerciseListId = :list
-              AND r.isCorrect = true
+              AND r.successful = true
             """)
     int countSuccessfulByUserAndList(
             @Param("user") User user,
