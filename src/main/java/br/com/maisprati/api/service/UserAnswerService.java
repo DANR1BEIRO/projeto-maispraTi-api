@@ -32,7 +32,7 @@ public class UserAnswerService {
 
         UserAnswer savedUserAnswer = userAnswerRepository.save(userAnswer);
 
-        UserAnswerResponseDto userAnswerResponseDto = userAnswerMapper.toResponse(savedUserAnswer);
+        UserAnswerResponseDto userAnswerResponseDto = userAnswerMapper.toResponse(savedUserAnswer, exercise);
 
         if(correta){
             userAnswerResponseDto.setMenssagem("Parabéns! Resposta correta!");

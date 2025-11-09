@@ -9,10 +9,11 @@ import org.mapstruct.Mapping;
 public interface UserMapper {
 
     @Mapping(source = "id", target = "id")
+    @Mapping(source = "role", target = "role")
     @Mapping(source = "nomeCompleto", target = "nome")
     @Mapping(source = "email", target = "email")
     @Mapping(source = "fotoPerfil", target = "fotoPerfil")
 //    @Mapping(source = "grupoAtual", target = "grupoAtual")
-    @Mapping(source = "streakAtual", target = "streakAtual")
+//    @Mapping(source = "streakAtual", target = "streakAtual")
     UserResponseDto toResponse(User user);
 }

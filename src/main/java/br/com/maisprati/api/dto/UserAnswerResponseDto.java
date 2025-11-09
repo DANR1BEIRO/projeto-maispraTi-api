@@ -10,4 +10,5 @@ public class UserAnswerResponseDto {
 //    private String respostaUsuario;
     private String menssagem;
     private boolean respostaCorreta;
+    private String respostaCorretaExercise;
 }
