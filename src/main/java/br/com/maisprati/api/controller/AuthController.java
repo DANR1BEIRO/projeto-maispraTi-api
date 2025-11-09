@@ -48,14 +48,14 @@ public class AuthController {
         return ResponseEntity.ok(new UserResponseDto(user));
     }
 
-    @PreAuthorize("hasAnyRole('PROFESSOR')")
+//    @PreAuthorize("hasAnyRole('PROFESSOR')")
     @GetMapping("/users")
     public ResponseEntity<List<UserResponseDto>> buscarUsuarios(){
         List<UserResponseDto> userResponseDto = authService.buscarUsuarios();
         return ResponseEntity.status(200).body(userResponseDto);
     }
 
-    @PreAuthorize("hasAnyRole('PROFESSOR')")
+//    @PreAuthorize("hasAnyRole('PROFESSOR')")
     @GetMapping("users/{id}")
     public ResponseEntity<UserResponseDto> getUserById(@PathVariable Integer id){
         UserResponseDto userResponseDto = authService.getUserById(id);
