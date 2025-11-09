@@ -10,36 +10,45 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/api/admin/")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class ExerciseController {
 
     private final ExerciseService exerciseService;
 
+//    @PreAuthorize("isAuthenticated()")
+//    @GetMapping("/exercises/{grupoId}")
+//    public ResponseEntity<List<ExerciseResponseDto>> listarPorGrupo(@PathVariable Integer grupoId) {
+//        List<ExerciseResponseDto> exercises = exerciseService.listarExerciciosPorGrupo(grupoId);
+//        return ResponseEntity.ok(exercises);
+//    }
+
 //    @PreAuthorize("hasAnyRole('PROFESSOR')")
-    @PostMapping("/exercise")
+    @PostMapping("/admin/exercise")
     public ResponseEntity<ExerciseResponseDto> criarExercicio(@Valid @RequestBody ExerciseRequestDto exerciseRequestDto) {
         ExerciseResponseDto exerciseResponseDto = exerciseService.criarExercicio(exerciseRequestDto);
         return ResponseEntity.status(201).body(exerciseResponseDto);
     }
 
 //    @PreAuthorize("hasAnyRole('PROFESSOR')")
-    @PutMapping("/exercise/{id}")
+    @PutMapping("/admin/exercise/{id}")
     public ResponseEntity<ExerciseResponseDto> atualizarExercicio(@PathVariable Integer id, @RequestBody ExercisePutRequestDto exercisePutRequestDto) {
         ExerciseResponseDto exerciseResponseDto = exerciseService.editarExercicio(id, exercisePutRequestDto);
         return ResponseEntity.status(201).body(exerciseResponseDto);
     }
 
 //    @PreAuthorize("hasAnyRole('PROFESSOR')")
-    @DeleteMapping("/exercise/{id}")
+    @DeleteMapping("/admin/exercise/{id}")
     public ResponseEntity<ExerciseResponseDto> deletarExercicio(@PathVariable Integer id){
         ExerciseResponseDto exerciseResponseDto = exerciseService.excluirExercicio(id);
         return ResponseEntity.status(201).body(exerciseResponseDto);
     }
 
 //    @PreAuthorize("hasAnyRole('ALUNO', 'PROFESSOR')")
-    @GetMapping("/exercise/{id}")
+    @GetMapping("/admin/exercise/{id}")
     public ResponseEntity<ExerciseResponseDto> buscarExercicio(@PathVariable Integer id){
         ExerciseResponseDto exerciseResponseDto = exerciseService.buscarExercicio(id);
         return ResponseEntity.status(201).body(exerciseResponseDto);
