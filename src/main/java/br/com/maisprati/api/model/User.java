@@ -47,6 +47,9 @@ public class User extends BaseEntity implements UserDetails {
     @Column(name = "\"grupoAtualId\"")
     private Integer grupoAtualId;
 
+    @OneToMany(mappedBy = "userId")
+    private List<UserAnswer> exerciciosRealizados;
+
 
     @JsonIgnore // evita loop infinito na serializacao
     @OneToMany(

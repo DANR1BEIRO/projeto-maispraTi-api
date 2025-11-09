@@ -42,6 +42,7 @@ public class JwtProvider {
 
         return Jwts.builder()
                 .setSubject(user.getUsername())
+                .claim("id", user.getId())
                 .claim("roles", roles)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
@@ -68,6 +69,17 @@ public class JwtProvider {
                 .getBody()
                 .getSubject();
     }
+
+    public Integer getUserIdFromToken(String token) {
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+
+        return claims.get("id", Integer.class);
+    }
+
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
         String username = getUsernameFromToken(token);

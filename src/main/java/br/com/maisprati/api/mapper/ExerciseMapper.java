@@ -13,6 +13,7 @@ public interface ExerciseMapper {
     @Mapping(source = "alternativas", target = "alternativas")
     @Mapping(source = "respostaCorreta", target = "respostaCorreta")
     @Mapping(source = "listaId", target = "exerciseListId.id")
+    @Mapping(source = "tipo", target = "tipo")
     Exercise toEntity(ExerciseRequestDto exerciseRequestDto);
 
     @Mapping(source = "id", target = "id")
@@ -20,6 +21,7 @@ public interface ExerciseMapper {
     @Mapping(source = "pergunta", target = "pergunta")
     @Mapping(source = "alternativas", target = "alternativas")
     @Mapping(source = "respostaCorreta", target = "respostaCorreta")
+    @Mapping(source = "tipo", target = "tipo")
     ExerciseResponseDto toResponse(Exercise exercise);
 }
 

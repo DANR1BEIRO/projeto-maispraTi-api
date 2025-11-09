@@ -51,6 +51,6 @@ public class ExerciseController {
     @GetMapping("/admin/exercise/{id}")
     public ResponseEntity<ExerciseResponseDto> buscarExercicio(@PathVariable Integer id){
         ExerciseResponseDto exerciseResponseDto = exerciseService.buscarExercicio(id);
-        return ResponseEntity.status(201).body(exerciseResponseDto);
+        return ResponseEntity.status(200).body(exerciseResponseDto);
     }
 }

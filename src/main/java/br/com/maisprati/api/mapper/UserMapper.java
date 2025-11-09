@@ -9,10 +9,16 @@ import org.mapstruct.Mapping;
 public interface UserMapper {
 
     @Mapping(source = "id", target = "id")
+    @Mapping(source = "role", target = "role")
     @Mapping(source = "nomeCompleto", target = "nome")
     @Mapping(source = "email", target = "email")
     @Mapping(source = "fotoPerfil", target = "fotoPerfil")
+    @Mapping(
+            target = "exerciciosCompletos",
+            expression = "java(user.getExerciciosRealizados().stream().map(e -> e.getId()).toList())"
+    )
+//    @Mapping(source = "exerciciosRealizados", target = "exerciciosRealizados")
 //    @Mapping(source = "grupoAtual", target = "grupoAtual")
-    @Mapping(source = "streakAtual", target = "streakAtual")
+//    @Mapping(source = "streakAtual", target = "streakAtual")
     UserResponseDto toResponse(User user);
 }

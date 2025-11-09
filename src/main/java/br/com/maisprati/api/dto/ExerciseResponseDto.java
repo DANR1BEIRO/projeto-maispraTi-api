@@ -1,5 +1,6 @@
 package br.com.maisprati.api.dto;
 
+import br.com.maisprati.api.enuns.ExerciseTypeEnum;
 import lombok.Data;
 
 import java.util.List;
@@ -11,4 +12,5 @@ public class ExerciseResponseDto {
     private List<String> alternativas;
     private String respostaCorreta;
     private Integer listaId;
+    private ExerciseTypeEnum tipo;
 }

@@ -3,6 +3,7 @@ package br.com.maisprati.api.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,9 +24,14 @@ public class ExerciseList extends BaseEntity {
     @Column(name = "\"descricao\"", nullable = false)
     private String descricao;
 
-    @Column(name = "\"exercicios\"")
     @OneToMany(mappedBy = "exerciseListId")
-    private List<Exercise> exercicios;
+    private List<Exercise> exercicios = new ArrayList<>();
+
+    //Porque parou de funcionar assim?
+//    @OneToMany(mappedBy = "exerciseListId")
+//    private List<Exercise> exercicios;
+
+
 
     @Column(name = "\"ordem\"", nullable = false)
     private Integer ordem;
