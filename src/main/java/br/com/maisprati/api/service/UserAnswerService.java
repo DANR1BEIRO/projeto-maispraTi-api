@@ -35,9 +35,9 @@ public class UserAnswerService {
         UserAnswerResponseDto userAnswerResponseDto = userAnswerMapper.toResponse(savedUserAnswer);
 
         if(correta){
-            userAnswerResponseDto.setMenssagem("Uhuuuul! Resposta correta!");
+            userAnswerResponseDto.setMenssagem("Parabéns! Resposta correta!");
         } else {
-            userAnswerResponseDto.setMenssagem("iiih! A resposta está incorreta");
+            userAnswerResponseDto.setMenssagem("Que pena! A resposta está incorreta.");
         }
 
         return userAnswerResponseDto;

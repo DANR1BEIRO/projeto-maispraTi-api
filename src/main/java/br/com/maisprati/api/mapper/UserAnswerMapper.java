@@ -17,10 +17,10 @@ public interface UserAnswerMapper {
     UserAnswer toEntity(UserAnswerRequestDto userAnswerRequestDto);
 
     //Request -> Response
-    @Mapping(source = "id", target = "id")
-    @Mapping(source = "userId.id", target = "idUsuario")
-    @Mapping(source = "exerciseId.id", target = "idExercicio")
-    @Mapping(source = "userAnswer", target = "respostaUsuario")
+//    @Mapping(source = "id", target = "id")
+//    @Mapping(source = "userId.id", target = "idUsuario")
+//    @Mapping(source = "exerciseId.id", target = "idExercicio")
+//    @Mapping(source = "userAnswer", target = "respostaUsuario")
     @Mapping(source = "correctAnswer", target = "respostaCorreta")
     UserAnswerResponseDto toResponse(UserAnswer userAnswer);
 
