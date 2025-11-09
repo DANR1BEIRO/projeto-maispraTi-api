@@ -1,7 +1,5 @@
 package br.com.maisprati.api.dto;
 
-import br.com.maisprati.api.model.ExerciseGroup;
-import br.com.maisprati.api.model.ExerciseList;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -12,8 +10,9 @@ public class ExerciseListResponseDto {
     private Integer id;
     private String titulo;
     private String descricao;
-    private List<ExerciseGroupResponseDto> grupos;
+//    private List<ExerciseGroupResponseDto> grupos;
 //    private List<ExerciseResponseDto> exercicios;
     private List<Integer> exerciciosIds;
+
 
 }

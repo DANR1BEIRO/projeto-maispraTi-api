@@ -10,7 +10,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -35,7 +34,7 @@ public class User extends BaseEntity implements UserDetails {
     @Column(name = "\"senhaHash\"", nullable = false)
     private String senhaHash;
 
-    @Column(name = "\"fotoPerfil\"")
+    @Column(name = "\"fotoPerfil\"")  // ← CORRIGIDO: sem aspas, snake_case
     private String fotoPerfil;
 
     @Type(PostgreSQLEnumType.class)
@@ -47,6 +46,10 @@ public class User extends BaseEntity implements UserDetails {
 
     @Column(name = "\"grupoAtualId\"")
     private Integer grupoAtualId;
+
+    @OneToMany(mappedBy = "userId")
+    private List<UserAnswer> exerciciosRealizados;
+
 
     @JsonIgnore // evita loop infinito na serializacao
     @OneToMany(

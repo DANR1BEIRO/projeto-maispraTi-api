@@ -11,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "\"Exercise\"")
+
 // @Data
 @Getter
 @Setter
@@ -39,11 +40,6 @@ public class Exercise extends BaseEntity {
     @JoinColumn(name = "\"lista_id\"")
     @JsonIgnore
     private ExerciseList exerciseListId;
-
-//    @ManyToOne
-//    @JsonIgnore
-//    @JoinColumn(name = "\"grupo_id\"")
-//    private ExerciseGroup grupo;
 
     @JsonIgnore
     @OneToMany(

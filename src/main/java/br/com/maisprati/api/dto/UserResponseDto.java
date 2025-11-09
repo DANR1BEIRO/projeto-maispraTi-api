@@ -5,6 +5,8 @@ import br.com.maisprati.api.model.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 public class UserResponseDto {
@@ -12,8 +14,8 @@ public class UserResponseDto {
     private String nome;
     private String email;
     private String fotoPerfil;
-
     private RoleEnum role;
+    private List<Integer> exerciciosCompletos;
 //    private Integer streakAtual;
 
     public UserResponseDto(User user) {
@@ -22,6 +24,7 @@ public class UserResponseDto {
         this.email = user.getEmail();
         this.fotoPerfil = user.getFotoPerfil();
         this.role = user.getRole();
+//        this.exerciciosRealizados = user.getExerciciosRealizados()
 //        this.streakAtual = user.getStreakAtual();
     }
 }

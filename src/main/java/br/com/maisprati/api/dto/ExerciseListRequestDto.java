@@ -9,5 +9,5 @@ public class ExerciseListRequestDto {
 
     private String titulo;
     private String descricao;
-    private List<ExerciseGroupRequestDto> grupos;
+//    private List<ExerciseRequestDto> lista;
 }
