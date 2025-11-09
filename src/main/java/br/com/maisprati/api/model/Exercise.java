@@ -10,7 +10,7 @@ import org.hibernate.annotations.Type;
 import java.util.List;
 
 @Entity
-@Table(name = "exercise")
+@Table(name = "\"Exercise\"")
 
 // @Data
 @Getter
