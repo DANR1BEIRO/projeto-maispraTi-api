@@ -11,8 +11,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "\"Exercise\"")
-
-// @Data
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,7 +18,8 @@ import java.util.List;
 public class Exercise extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ordem_seq")
+    @SequenceGenerator(name = "ordem_seq", sequenceName = "ordem_seq", allocationSize = 1)
     private Integer id;
 
     @Type(PostgreSQLExerciseTypeEnum.class)
@@ -40,6 +39,11 @@ public class Exercise extends BaseEntity {
     @JoinColumn(name = "\"lista_id\"")
     @JsonIgnore
     private ExerciseList exerciseListId;
+
+//    @Column(name = "\"ordem\"", nullable = false, unique = true)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ordem_seq")
+//    @SequenceGenerator(name = "ordem_seq", sequenceName = "ordem_seq", allocationSize = 1)
+//    private Integer ordem;
 
     @JsonIgnore
     @OneToMany(

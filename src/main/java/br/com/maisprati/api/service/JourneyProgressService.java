@@ -41,7 +41,7 @@ public class JourneyProgressService {
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "Lista não encontrada: " + listaAtual));
 
-        return exerciseListService.buscarProximaListaPorOrdem(lista.getOrdem())
+        return exerciseListService.buscarProximaListaPorOrdem(lista.getId())
                 .map(ExerciseList::getTitulo)
                 .orElse("Trilha Concluída");
     }

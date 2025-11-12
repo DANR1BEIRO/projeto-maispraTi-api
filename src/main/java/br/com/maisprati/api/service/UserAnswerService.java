@@ -13,16 +13,19 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+import static br.com.maisprati.api.enuns.ProgressStatusEnum.CONCLUIDO;
+
 @Service
 @RequiredArgsConstructor
 public class UserAnswerService {
-//O usuário irá responser via serviço /submit, e eu irei salvar as respostar do usuário no userAnsweServic
-// Este serviço irá servir para o progresso validar se está OK?
+
     private final UserAnswerRepository userAnswerRepository;
     private final UserAnswerMapper userAnswerMapper;
     private final ExerciseService exerciseService;
     public UserAnswerResponseDto criarResposta(UserAnswerRequestDto userAnswerRequestDto){
         UserAnswer userAnswer = userAnswerMapper.toEntity(userAnswerRequestDto);
+
+        userAnswer.setStatus(CONCLUIDO);
 
         ExerciseResponseDto exercise = exerciseService.buscarExercicio(userAnswerRequestDto.getIdExercicio());
 
@@ -44,9 +47,9 @@ public class UserAnswerService {
     }
 
     public UserAnswerResponseDto buscarResposta(Integer id){
-        Optional<UserAnswer> userAnswer = userAnswerRepository.findById(id);
-        UserAnswer userAnswerResponse = userAnswerRepository.getReferenceById(id);
-        UserAnswerResponseDto userAnswerResponseDto = userAnswerMapper.toResponse(userAnswerResponse);
+        Optional<UserAnswer> userAnswer = userAnswerRepository.findFirstByExerciseId_Id(id);
+//        UserAnswer userAnswerResponse = userAnswerRepository.getReferenceById(id);
+        UserAnswerResponseDto userAnswerResponseDto = userAnswerMapper.toResponse(userAnswer.get());
         return userAnswerResponseDto;
     }
 }

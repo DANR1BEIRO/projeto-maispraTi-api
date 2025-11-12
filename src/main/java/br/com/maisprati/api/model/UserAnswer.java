@@ -1,11 +1,13 @@
 package br.com.maisprati.api.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import br.com.maisprati.api.enuns.PostgreSQLProgressStatusEnumType;
+import br.com.maisprati.api.enuns.ProgressStatusEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "\"UserAnswer\"")
@@ -30,5 +32,13 @@ public class UserAnswer {
     private String userAnswer;
 
     @Column(name = "resposta_correta")
-    private boolean correctAnswer;
+    private Boolean correctAnswer;
+
+    @Type(PostgreSQLProgressStatusEnumType.class)
+    @Column(columnDefinition = "ProgressStatus", name = "\"status\"", nullable = false)
+    private ProgressStatusEnum status; // DISPONIVEL, BLOQUEADO, CONCLUIDO
+
+    public Boolean isCorrectAnswer() {
+        return getCorrectAnswer();
+    }
 }

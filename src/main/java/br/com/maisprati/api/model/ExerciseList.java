@@ -14,8 +14,12 @@ import java.util.List;
 @AllArgsConstructor
 public class ExerciseList extends BaseEntity {
 
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Integer id;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ordem_seq")
+    @SequenceGenerator(name = "ordem_seq", sequenceName = "ordem_seq", allocationSize = 1)
     private Integer id;
 
     @Column(name = "\"titulo\"", nullable = false)
@@ -31,9 +35,9 @@ public class ExerciseList extends BaseEntity {
 //    @OneToMany(mappedBy = "exerciseListId")
 //    private List<Exercise> exercicios;
 
-
-
     @Column(name = "\"ordem\"", nullable = false)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ordem_seq")
+//    @SequenceGenerator(name = "ordem_seq", sequenceName = "ordem_seq", allocationSize = 1)
     private Integer ordem;
 
 
