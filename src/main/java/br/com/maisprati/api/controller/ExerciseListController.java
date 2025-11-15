@@ -13,6 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -29,9 +30,9 @@ public class ExerciseListController {
         return ResponseEntity.status(201).body(exerciseListResponseDto);
     }
 
-    @GetMapping("/exercise/list")
-    public ResponseEntity<List<ExerciseListResponseDto>> buscarTodasListasExercicios() {
-        List<ExerciseListResponseDto> exerciseListResponseDto = exerciseListService.buscarTodasAsListas();
+    @GetMapping("/exercise/list/{idUser}")
+    public ResponseEntity<List<Map<String, Object>>> buscarTodasListasExercicios(@PathVariable Integer idUser) {
+        List<Map<String, Object>> exerciseListResponseDto = exerciseListService.buscarTodasAsListas(idUser);
         return ResponseEntity.status(200).body(exerciseListResponseDto);
     }
 }

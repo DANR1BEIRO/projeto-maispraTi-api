@@ -46,6 +46,9 @@ public class UserAnswer {
     @Column(name = "status")
     private ProgressStatusEnum status; // DISPONIVEL, BLOQUEADO, CONCLUIDO
 
+//    @Column(name = "proximo_exercicio")
+//    private Integer nextExercise;
+
     public Boolean isCorrectAnswer() {
         return getCorrectAnswer();
     }

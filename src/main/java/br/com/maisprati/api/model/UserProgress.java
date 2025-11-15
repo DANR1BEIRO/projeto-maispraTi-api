@@ -13,28 +13,46 @@ import org.hibernate.annotations.Type;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserProgress extends BaseEntity{
+public class UserProgress {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "\"userId\"")
+    @JoinColumn(name = "id_usuario")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "\"exerciseId\"")
+    @JoinColumn(name = "id_exercicio")
     private Exercise exercise;
 
-    @Type(PostgreSQLProgressStatusEnumType.class)
-    @Column(columnDefinition = "ProgressStatus", name = "\"status\"", nullable = false)
-    private ProgressStatusEnum status; // DISPONIVEL, BLOQUEADO, CONCLUIDO
-
-    @Column(name = "\"respondidoCorretamente\"", nullable = false)
-    private Boolean respondidoCorretamente;
-
+    @Enumerated(EnumType.STRING)
+    private ProgressStatusEnum status;
 }
+
+//public class UserProgress extends BaseEntity{
+//
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Integer id;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "\"userId\"")
+//    private User user;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "\"exerciseId\"")
+//    private Exercise exercise;
+//
+//    @Type(PostgreSQLProgressStatusEnumType.class)
+//    @Column(columnDefinition = "ProgressStatus", name = "\"status\"", nullable = false)
+//    private ProgressStatusEnum status; // DISPONIVEL, BLOQUEADO, CONCLUIDO
+//
+//    @Column(name = "\"respondidoCorretamente\"", nullable = false)
+//    private Boolean respondidoCorretamente;
+//
+//}
 
 //        id                     Int  @id @default(autoincrement())
 //        userId                 Int

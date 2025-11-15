@@ -17,4 +17,5 @@ public interface ExerciseListRepository extends JpaRepository<ExerciseList, Inte
 
 //    List<ExerciseList> findAllByIdByIdAsc();
 //    Optional<ExerciseList> findByOrdem(Integer ordem);
+
 }
