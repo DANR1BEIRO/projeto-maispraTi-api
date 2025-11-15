@@ -1,4 +1,4 @@
-package br.com.maisprati.api.controller;
+package br.com.maisprati.api.mapper.controller;
 
 import br.com.maisprati.api.dto.ExerciseListRequestDto;
 import br.com.maisprati.api.dto.ExerciseListResponseDto;

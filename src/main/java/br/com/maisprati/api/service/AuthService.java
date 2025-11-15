@@ -63,8 +63,6 @@ public class AuthService implements UserDetailsService {
         return new LoginResponseDto(token);
     }
 
-    // Agora o metodo lança exceção se o usuário não existir,
-    // evitando null e fluxo inconsistente
     public UserResponseDto getUserById(Integer id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuário não existe"));
@@ -77,23 +75,10 @@ public class AuthService implements UserDetailsService {
         List<User> usuarios = userRepository.findAll();
         List<UserResponseDto> listUsers = new ArrayList<>();
         for (int i = 0; i < usuarios.size(); i++) {
-//            UserResponseDto userResponseDto = new UserResponseDto();
-//            userResponseDto.setId(usuarios.get(i).getId());
-//            userResponseDto.setNome(usuarios.get(i).getNome());
-//            userResponseDto.setEmail(usuarios.get(i).getEmail());
             UserResponseDto userResponseDto = mapper.toResponse(usuarios.get(i));
             listUsers.add(userResponseDto);
 
         }
-        //Outra forma de fazer:
-//        return userRepository.findAll().stream()
-//                .map(usuario -> new UserResponseDto(
-//                        usuario.getId(),
-//                        usuario.getNomeCompleto(),
-//                        usuario.getEmail()
-//                ))
-//                .toList();
-
         return listUsers;
     }
 }

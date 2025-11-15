@@ -11,12 +11,10 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ExerciseListMapper {
 
-    // Request → Entity
     @Mapping(source = "titulo", target = "titulo")
     @Mapping(source = "descricao", target = "descricao")
     ExerciseList toEntity(ExerciseListRequestDto dto);
 
-    // Entity → Response
     @Mapping(source = "id", target = "id")
     @Mapping(source = "titulo", target = "titulo")
     @Mapping(source = "descricao", target = "descricao")
@@ -24,7 +22,6 @@ public interface ExerciseListMapper {
             target = "exerciciosIds",
             expression = "java(entity.getExercicios().stream().map(e -> e.getId()).toList())"
     )
-//    @Mapping(source = "exercicios", target = "exercicios")
     ExerciseListResponseDto toResponse(ExerciseList entity);
 
     List<ExerciseListResponseDto> toResponseList(List<ExerciseList> entities);

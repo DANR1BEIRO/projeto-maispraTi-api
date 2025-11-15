@@ -34,7 +34,7 @@ public class User extends BaseEntity implements UserDetails {
     @Column(name = "\"senhaHash\"", nullable = false)
     private String senhaHash;
 
-    @Column(name = "\"fotoPerfil\"")  // ← CORRIGIDO: sem aspas, snake_case
+    @Column(name = "\"fotoPerfil\"")
     private String fotoPerfil;
 
     @Type(PostgreSQLEnumType.class)
@@ -50,8 +50,7 @@ public class User extends BaseEntity implements UserDetails {
     @OneToMany(mappedBy = "userId")
     private List<UserAnswer> exerciciosRealizados;
 
-
-    @JsonIgnore // evita loop infinito na serializacao
+    @JsonIgnore
     @OneToMany(
             mappedBy = "user",
             cascade = CascadeType.ALL,

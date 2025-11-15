@@ -12,7 +12,7 @@ public interface ExerciseRepository extends JpaRepository<Exercise, Integer> {
     // TODO: Adaptar consulta quando a jornada passar a usar ExerciseList em vez de grupo
     // Exemplo futuro:
     // List<Exercise> findByExerciseListId(ExerciseList list);
-//    List<Exercise> findAllByExerciseList_IdOrderByIdAsc(Integer exerciseListId);
+    // List<Exercise> findAllByExerciseList_IdOrderByIdAsc(Integer exerciseListId);
 
     int countByExerciseListId(ExerciseList exerciseList);
 

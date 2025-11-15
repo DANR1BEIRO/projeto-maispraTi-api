@@ -24,4 +24,3 @@ public interface ExerciseMapper {
     @Mapping(source = "tipo", target = "tipo")
     ExerciseResponseDto toResponse(Exercise exercise);
 }
-

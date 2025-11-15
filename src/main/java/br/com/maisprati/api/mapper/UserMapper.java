@@ -17,8 +17,5 @@ public interface UserMapper {
             target = "exerciciosCompletos",
             expression = "java(user.getExerciciosRealizados().stream().map(e -> e.getId()).toList())"
     )
-//    @Mapping(source = "exerciciosRealizados", target = "exerciciosRealizados")
-//    @Mapping(source = "grupoAtual", target = "grupoAtual")
-//    @Mapping(source = "streakAtual", target = "streakAtual")
     UserResponseDto toResponse(User user);
 }

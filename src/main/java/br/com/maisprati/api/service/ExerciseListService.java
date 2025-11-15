@@ -40,33 +40,6 @@ public class ExerciseListService {
         return buscarListas(idUsuario);
     }
 
-//    public List<Map<String, Object>> buscarListas(Integer idUsuario) {
-//        List<ExerciseListResponseDto> todasListas = mapper.toResponseList(exerciseListRepository.findAll());
-//
-//        List<Map<String, Object>> listaRetorno = new ArrayList<>();
-//
-//        for (ExerciseListResponseDto lista: todasListas) {
-//            List<Map<String, Object>> listaExercicioRetorno = new ArrayList<>();
-//            Map<String, Object> retorno = new HashMap<>();
-//            for (Integer idExercicio: lista.getExerciciosIds()) {
-//                UserAnswer byUserId_idAndExerciseId_id = userAnswerRepository.findByUserId_IdAndExerciseId_Id(idUsuario, idExercicio);
-//                if (byUserId_idAndExerciseId_id != null) {
-//                    listaExercicioRetorno.add(Map.of("id", idExercicio, "respondido", Boolean.TRUE, "disponivel", Boolean.TRUE));
-//                } else {
-//                    listaExercicioRetorno.add(Map.of("id", idExercicio, "respondido", Boolean.FALSE, "disponivel", Boolean.FALSE));
-//                }
-//            }
-//
-//            retorno.put("exercicios", listaExercicioRetorno);
-//            retorno.put("id;", lista.getId());
-//            retorno.put("titulo;", lista.getTitulo());
-//            retorno.put("descricao;", lista.getDescricao());
-//            listaRetorno.add(retorno);
-//        }
-//
-//        return listaRetorno;
-//    }
-
     public List<Map<String, Object>> buscarListas(Integer idUsuario) {
         List<ExerciseListResponseDto> todasListas = mapper.toResponseList(exerciseListRepository.findAll());
 
@@ -84,7 +57,6 @@ public class ExerciseListService {
 
             boolean todosRespondidos = true;
 
-            // Ordena a lista interna pelo ID
             List<Integer> idsOrdenados = new ArrayList<>(lista.getExerciciosIds());
             Collections.sort(idsOrdenados);
 
@@ -94,32 +66,21 @@ public class ExerciseListService {
                         userAnswerRepository.findByUserId_IdAndExerciseId_Id(idUsuario, idExercicio);
 
                 boolean respondido = (userAnswer != null);
-//                boolean disponivelExercicio = false;
                 boolean disponivelExercicio;
                 if (!respondido) {
                     todosRespondidos = false;
                 }
 
-                //AQUI
                 if (respondido) {
-                    // Se está respondido, ele é disponível SEMPRE
                     disponivelExercicio = true;
 
                 } else if (listaDisponivel && !proximoExercicioDisponivelEncontrado) {
-                    // Primeiro não respondido da lista disponível
                     disponivelExercicio = true;
                     proximoExercicioDisponivelEncontrado = true;
 
                 } else {
-                    // Demais não respondidos
                     disponivelExercicio = false;
                 }
-//                if (listaDisponivel) {
-//                    if (!respondido && !proximoExercicioDisponivelEncontrado) {
-//                        disponivelExercicio = true;
-//                        proximoExercicioDisponivelEncontrado = true;
-//                    }
-//                }
 
                 listaExercicioRetorno.add(
                         Map.of(

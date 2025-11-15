@@ -16,21 +16,18 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    // lista todos (admin)
     public List<UserResponseDto> findAll() {
         return userRepository.findAll().stream()
                 .map(UserResponseDto::new)
                 .toList();
     }
 
-    // bosca por id e retorna dto
     public UserResponseDto findByIdDto(Integer id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado: " + id));
         return new UserResponseDto(user);
     }
 
-    // busca por id e retorna entidade retorna entidade
     public Optional<User> findById(Integer id) {
         return userRepository.findById(id);
     }
