@@ -16,7 +16,6 @@ public class UserResponseDto {
     private String fotoPerfil;
     private RoleEnum role;
     private List<Integer> exerciciosCompletos;
-//    private Integer streakAtual;
 
     public UserResponseDto(User user) {
         this.id = user.getId();
@@ -24,7 +23,5 @@ public class UserResponseDto {
         this.email = user.getEmail();
         this.fotoPerfil = user.getFotoPerfil();
         this.role = user.getRole();
-//        this.exerciciosRealizados = user.getExerciciosRealizados()
-//        this.streakAtual = user.getStreakAtual();
     }
 }

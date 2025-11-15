@@ -13,6 +13,4 @@ public class ExerciseListResponseDto {
 //    private List<ExerciseGroupResponseDto> grupos;
 //    private List<ExerciseResponseDto> exercicios;
     private List<Integer> exerciciosIds;
-
-
 }

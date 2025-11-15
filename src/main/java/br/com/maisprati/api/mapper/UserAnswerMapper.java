@@ -8,6 +8,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 import javax.swing.*;
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface UserAnswerMapper {
@@ -28,5 +29,7 @@ public interface UserAnswerMapper {
     @Mapping(source = "userAnswer.correctAnswer", target = "respostaCorreta")
     @Mapping(source = "exercise.respostaCorreta", target = "respostaCorretaExercise")
     UserAnswerResponseDto toResponse(UserAnswer userAnswer, ExerciseResponseDto exercise);
+
+    List<UserAnswerResponseDto> toResponseList(List<UserAnswer> userAnswerList);
 
 }

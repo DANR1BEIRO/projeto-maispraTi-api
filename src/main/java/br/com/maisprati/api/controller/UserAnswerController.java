@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/exercise")
 @RequiredArgsConstructor
@@ -23,6 +25,12 @@ public class UserAnswerController {
     @GetMapping("/submit/{id}")
     public ResponseEntity<UserAnswerResponseDto> buscarResposta(@PathVariable Integer id){
         UserAnswerResponseDto userAnswerResponseDto = userAnswerService.buscarResposta(id);
+        return ResponseEntity.status(200).body(userAnswerResponseDto);
+    }
+
+    @GetMapping("/user/{id}/answers")
+    public ResponseEntity<List<UserAnswerResponseDto>> buscarRespostasDoUsuario(@PathVariable Integer id){
+        List<UserAnswerResponseDto> userAnswerResponseDto = userAnswerService.getUserAnswers(id);
         return ResponseEntity.status(200).body(userAnswerResponseDto);
     }
 }

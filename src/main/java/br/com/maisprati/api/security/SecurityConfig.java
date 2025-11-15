@@ -50,6 +50,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/exercises/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/journey/**").permitAll()
                         .requestMatchers("/actuator/**").permitAll()
+                        .requestMatchers("/progress/**").permitAll()
 
                         .anyRequest().authenticated()
                 );
