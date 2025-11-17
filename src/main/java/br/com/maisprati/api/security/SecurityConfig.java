@@ -38,11 +38,19 @@ public class SecurityConfig {
             HttpSecurity http,
             @Autowired(required = false) JwtAuthenticationFilter jwtFilter) throws Exception {
 
-        var chain = http
+        http
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+
+                        .requestMatchers(
+                                "/v3/api-docs/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html"
+                        ).permitAll()
+                        .requestMatchers("/v3/api-docs.yaml").permitAll()
                         .requestMatchers("/api/admin/exercise/**").permitAll()
                         .requestMatchers("/api/exercise/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
@@ -51,21 +59,21 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/journey/**").permitAll()
                         .requestMatchers("/actuator/**").permitAll()
                         .requestMatchers("/progress/**").permitAll()
-
                         .anyRequest().authenticated()
                 );
 
         if (jwtFilter != null) {
-            chain.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+            http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         }
 
-        return chain.build();
+        return http.build();
     }
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(List.of(
                 "http://localhost:4200",
+                "http://localhost:8080",
                 "http://localhost:5173",
                 "http://127.0.0.1:5173/",
                 "https://projeto-mais-prati.vercel.app"
