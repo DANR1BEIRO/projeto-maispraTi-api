@@ -43,15 +43,17 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/api/admin/exercise/**").permitAll()
-                        .requestMatchers("/api/exercise/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/exercises/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/journey/**").permitAll()
-                        .requestMatchers("/actuator/**").permitAll()
-                        .requestMatchers("/progress/**").permitAll()
-
+                        .requestMatchers(
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/api/admin/exercise/**",
+                                "/api/exercise/**",
+                                "/api/exercises/**",
+                                "/api/journey/**",
+                                "/progress/**",
+                                "/actuator/**"
+                        ).permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/auth/register", "/api/auth/login").permitAll()
                         .anyRequest().authenticated()
                 );
 
