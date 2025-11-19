@@ -8,9 +8,5 @@ import java.util.Optional;
 
 public interface JourneyProgressRepository extends JpaRepository<JourneyProgress, Integer> {
 
-    /**
-     * Busca o progresso de jornada associado ao usuário informado.
-     * Retorna Optional para tratamento seguro.
-     */
     Optional<JourneyProgress> findByUser(User user);
 }

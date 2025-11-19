@@ -42,7 +42,6 @@ public class UserController {
         return ResponseEntity.ok(userService.findAll());
     }
 
-    // NOVO: BUSCAR POR ID (ADMIN OU PRÓPRIO)
     @PreAuthorize("hasRole('ADMIN') OR principal.id == #id")
     @GetMapping("/{id}")
     public ResponseEntity<UserResponseDto> getUserById(

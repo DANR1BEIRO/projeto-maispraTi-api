@@ -1,7 +1,6 @@
 package br.com.maisprati.api.dto;
 
 import br.com.maisprati.api.enuns.ExerciseTypeEnum;
-//import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
