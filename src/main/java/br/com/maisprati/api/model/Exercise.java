@@ -40,11 +40,6 @@ public class Exercise extends BaseEntity {
     @JsonIgnore
     private ExerciseList exerciseListId;
 
-//    @Column(name = "\"ordem\"", nullable = false, unique = true)
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ordem_seq")
-//    @SequenceGenerator(name = "ordem_seq", sequenceName = "ordem_seq", allocationSize = 1)
-//    private Integer ordem;
-
     @JsonIgnore
     @OneToMany(
             mappedBy = "exercise",

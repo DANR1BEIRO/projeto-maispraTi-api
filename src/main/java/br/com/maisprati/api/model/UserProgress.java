@@ -30,35 +30,3 @@ public class UserProgress {
     @Enumerated(EnumType.STRING)
     private ProgressStatusEnum status;
 }
-
-//public class UserProgress extends BaseEntity{
-//
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Integer id;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "\"userId\"")
-//    private User user;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "\"exerciseId\"")
-//    private Exercise exercise;
-//
-//    @Type(PostgreSQLProgressStatusEnumType.class)
-//    @Column(columnDefinition = "ProgressStatus", name = "\"status\"", nullable = false)
-//    private ProgressStatusEnum status; // DISPONIVEL, BLOQUEADO, CONCLUIDO
-//
-//    @Column(name = "\"respondidoCorretamente\"", nullable = false)
-//    private Boolean respondidoCorretamente;
-//
-//}
-
-//        id                     Int  @id @default(autoincrement())
-//        userId                 Int
-//        user                   User @relation(fields: [userId], references: [id])
-//        exerciseId             Int
-//        exercise               Exercise @relation(fields: [exerciseId], references: [id])
-//        status                 ProgressStatus @default(BLOQUEADO)
-//        respondidoCorretamente Boolean        @default(false)
-//        updatedAt              DateTime       @updatedAt

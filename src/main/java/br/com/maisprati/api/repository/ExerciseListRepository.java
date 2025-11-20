@@ -15,7 +15,4 @@ public interface ExerciseListRepository extends JpaRepository<ExerciseList, Inte
     @Query("SELECT el FROM ExerciseList el WHERE el.ordem = :ordem + 1")
     Optional<ExerciseList> buscarProximaLista(@Param("ordem") Integer ordem);
 
-//    List<ExerciseList> findAllByIdByIdAsc();
-//    Optional<ExerciseList> findByOrdem(Integer ordem);
-
 }

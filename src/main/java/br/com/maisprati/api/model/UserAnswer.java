@@ -1,14 +1,11 @@
 package br.com.maisprati.api.model;
 
-import br.com.maisprati.api.enuns.PostgreSQLEnumType;
-import br.com.maisprati.api.enuns.PostgreSQLProgressStatusEnumType;
 import br.com.maisprati.api.enuns.ProgressStatusEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "\"UserAnswer\"")
@@ -39,15 +36,9 @@ public class UserAnswer {
     @Column(name = "resposta_correta")
     private Boolean correctAnswer;
 
-//    @Type(PostgreSQLProgressStatusEnumType.class)
-//    @Column(columnDefinition = "ProgressStatus", name = "status", nullable = false)
-//    @Type(PostgreSQLEnumType.class)
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private ProgressStatusEnum status; // DISPONIVEL, BLOQUEADO, CONCLUIDO
-
-//    @Column(name = "proximo_exercicio")
-//    private Integer nextExercise;
+    private ProgressStatusEnum status;
 
     public Boolean isCorrectAnswer() {
         return getCorrectAnswer();

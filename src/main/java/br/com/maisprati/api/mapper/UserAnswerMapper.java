@@ -12,17 +12,11 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface UserAnswerMapper {
-    // De DTO Request para Entidade
     @Mapping(source = "idUsuario", target = "userId.id")
     @Mapping(source = "idExercicio", target = "exerciseId.id")
     @Mapping(source = "respostaUsuario", target = "userAnswer")
     UserAnswer toEntity(UserAnswerRequestDto userAnswerRequestDto);
 
-    //Request -> Response
-//    @Mapping(source = "id", target = "id")
-//    @Mapping(source = "userId.id", target = "idUsuario")
-//    @Mapping(source = "exerciseId.id", target = "idExercicio")
-//    @Mapping(source = "userAnswer", target = "respostaUsuario")
     @Mapping(source = "correctAnswer", target = "respostaCorreta")
     UserAnswerResponseDto toResponse(UserAnswer userAnswer);
 
